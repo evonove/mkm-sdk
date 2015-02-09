@@ -1,7 +1,9 @@
+import http
 import unittest
 import requests
 from requests_oauthlib import OAuth1
 from mkmsdk.MKMOAuth1 import BuggedOAuth1
+
 
 class OAuthTest(unittest.TestCase):
     def setUp(self):
@@ -30,8 +32,7 @@ class OAuthTest(unittest.TestCase):
 
         r = requests.get(self.url, auth=self.auth)
 
-        self.assertTrue(r.status_code == '200', 'Server did not give a positive answer')
-
+        self.assertEqual(r.status_code, http.client.OK)
 
 
 if __name__ == '__main__':
