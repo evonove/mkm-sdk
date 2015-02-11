@@ -7,7 +7,7 @@ from mkmsdk.MKMOAuth1 import BuggedOAuth1
 
 class OAuthTest(unittest.TestCase):
     def setUp(self):
-        self.url = 'https://www.mkmapi.eu/ws/v1.1/account'
+        self.url = 'https://www.mkmapi.eu/ws/v1.1/output.json/account'
         self.app_token = 'Xv48wJ1XwyaQFOcI'
         self.app_secret = 'fTvgiZYyly6OHYDExKuaFhwTwTsdJslv'
         self.access_token = '81Q5MJKgNe9Lh3m7bGH2li8R8ycaGvtI'
@@ -27,12 +27,57 @@ class OAuthTest(unittest.TestCase):
 
     def test_oauth1_is_correct(self):
         """
-        Check if response from server is not negative
+        Checks if response from server is not negative
         """
 
         r = requests.get(self.url, auth=self.auth)
 
         self.assertEqual(r.status_code, http.client.OK)
+
+    def test_account_entity_is_as_expected(self):
+        """
+        Checks if the account entity received is as expected
+        """
+
+        expected_account_response = {'account':
+                                         {
+                                             'accountBalance': 0,
+                                             'onVacation': False,
+                                             'idDisplayLanguage': 1,
+                                             'articlesInShoppingCart': 0,
+                                             'isCommercial': 0,
+                                             'name':
+                                                 {
+                                                     'lastName': 'Cerza',
+                                                     'firstName': 'Silvano'
+                                                 },
+                                             'country': 'IT',
+                                             'sellCount': 0,
+                                             'shipsFast': 0,
+                                             'reputation': 0,
+                                             'username': 'Alien1993',
+                                             'unreadMessages': 0,
+                                             'bankRecharge': 0,
+                                             'idUser': 882784,
+                                             'address':
+                                                 {
+                                                     'street': 'Via Padre Camillo Torres 25',
+                                                     'zip': '06063',
+                                                     'city': 'Magione',
+                                                     'name': 'Silvano Cerza',
+                                                     'country': 'IT',
+                                                     'extra': ''
+                                                 },
+                                             'paypalRecharge': 0,
+                                             'riskGroup': 1
+                                         }
+                                    }
+
+        r = requests.get(self.url, auth=self.auth)
+
+        json_response = r.json()
+
+        self.assertEqual(json_response, expected_account_response, 'Response received is not as expected')
 
 
 if __name__ == '__main__':
