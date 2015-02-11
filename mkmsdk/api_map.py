@@ -82,7 +82,7 @@ _API_MAP = {
                 },
 
                 'products': {
-                    'url': '/products/{name}/{game}/{language}/{match}', #An optional parameter can be inserted for pagination
+                    'url': '/products/{name}/{game}/{language}/{match}',  # An optional parameter can be inserted for pagination
                     'method': 'get',
                     'description': 'Returns products specified by their name, game and language'
                 },
@@ -100,7 +100,7 @@ _API_MAP = {
                 },
 
                 'articles': {
-                    'url': '/articles/{product}', #An optional parameter can be inserted for pagination
+                    'url': '/articles/{product}',  # An optional parameter can be inserted for pagination
                     'method': 'get',
                     'description': 'Returns Article entities for available articles specified by their product ID'
                 },
@@ -112,7 +112,7 @@ _API_MAP = {
                 },
 
                 'articles_user': {
-                    'url': '/articles/user/{user}', #An optional parameter can be inserted for pagination
+                    'url': '/articles/user/{user}',  # An optional parameter can be inserted for pagination
                     'method': 'get',
                     'description': 'Returns Article entities for available articles from a specified user by ID or name'
                 }
@@ -139,7 +139,7 @@ _API_MAP = {
                 },
 
                 'orders': {
-                    'url': '/orders/{actor}/{state}', #An optional parameter can be inserted for pagination
+                    'url': '/orders/{actor}/{state}',  # An optional parameter can be inserted for pagination
                     'method': 'get',
                     'description': 'Returns the complete collection of filtered orders.'
                 }
@@ -180,10 +180,99 @@ _API_MAP = {
                 'get_shipping_method': {
                     'url': '/shoppingcart/shippingmethod/{method}',
                     'method': 'get',
-                    'description': ''
+                    'description': 'Returns all possible shipping method for the specified reservation'
+                },
+
+                'put_shipping_method': {
+                    'url': '/shoppingcart/shipping/{method}',
+                    'method': 'put',
+                    'description': 'Changes the shipping method of a specified reservation'
+                }
+            },
+
+            'stock_management': {
+
+                'get_stock': {
+                    'url': '/stock',  # An optional parameter can be inserted for pagination
+                    'method': 'get',
+                    'description': 'Returns the Article entities in the authenticated user`s stock'
+                },
+
+                'post_stock': {
+                    'url': '/stock',
+                    'method': 'post',
+                    'description': 'Adds new articles to the user`s stock'
+                },
+
+                'put_stock': {
+                    'url': '/stock',
+                    'method': 'put',
+                    'description': 'Changes articles in the user`s stock'
+                },
+
+                'delete_stock': {
+                    'url': '/stock',
+                    'method': 'delete',
+                    'description': 'Removes articles from the user`s stock'
+                },
+
+                'get_article': {
+                    'url': '/stock/article/{article}',
+                    'method': 'get',
+                    'description': 'Returns a single article in the authenticated user`s stock'
+                },
+
+                'get_articles': {
+                    'url': '/stock/articles/{name}/{game}',
+                    'method': 'get',
+                    'description': 'Searches for and returns articles specified by the article`s name and game'
+                },
+
+                'increase_stock': {
+                    'url': '/stock/increase',
+                    'method': 'put',
+                    'description': 'Increase quantities for articles in authenticated user`s stock'
+                },
+
+                'decrease_stock': {
+                    'url': '/stock/decrease',
+                    'method': 'put',
+                    'description': 'Decrease quantities for articles in authenticated user`s stock'
+                }
+            },
+
+            'wants_list': {
+
+                'get_wants_list': {
+                    'url': '/wantslist',
+                    'method': 'get',
+                    'description': 'Returns all wants lists for the authenticated user'
+                },
+
+                'get_user_wants_list': {
+                    'url': '/wantslist/{user}',
+                    'method': 'get',
+                    'description': 'Returns all wants lists for the specified user'
+                },
+
+                'post_wants_list': {
+                    'url': '/wantslist/{wants}',
+                    'method': 'post',
+                    'description': 'Creates a new wants list for the authenticated user'
+                },
+
+                'put_wants_list': {
+                    'url': '/wantslist/{wants}',
+                    'method': 'put',
+                    'description': 'Adds, edits, or removes wants to, at, or from a wants list specified by its ID'
+                },
+
+                'delete_wants_list': {
+                    'url': '/wantslist/{wants}',
+                    'method': 'delete',
+                    'description': 'Deletes a wants list specified by its ID for the authenticated user'
                 }
             }
-
         }
     }
 }
