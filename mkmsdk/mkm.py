@@ -16,10 +16,11 @@ class Mkm:
         return instance
 
     def __call__(self, *args, **kwargs):
-        return self.get_resolver().resolve(api_map=self.api_map, **kwargs)
+        resolver = resolvers.SimpleResolver()
+        return resolver.resolve(api_map=self.api_map, **kwargs)
 
     def get_resolver(self):
-        resolver = resolvers.SimpleResolver()
-        return resolver
+        return resolvers.SimpleResolver()
+
 
 mkm = Mkm(api_map=default_api_map)

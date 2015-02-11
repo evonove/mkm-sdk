@@ -1,7 +1,12 @@
-from mkmsdk import api
+from mkmsdk.api import Api
 
 
 class SimpleResolver:
+    def __init__(self):
+        self.url = ''
+        self.method = ''
+        self.api = Api()
+
     def setup(self, api_map=None, url_entry=None):
 
         url, method = api_map['url'], api_map['method']
@@ -14,4 +19,4 @@ class SimpleResolver:
     def resolve(self, api_map=None, url_entry=None, **kwargs):
         self.setup(api_map=api_map, url_entry=url_entry)
 
-        return api.request(url=self.url, method=self.method, **kwargs)
+        return self.api.request(url=self.url, method=self.method, **kwargs)
