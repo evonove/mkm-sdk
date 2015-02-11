@@ -77,7 +77,15 @@ class OAuthTest(unittest.TestCase):
 
         json_response = r.json()
 
-        self.assertEqual(json_response, expected_account_response, 'Response received is not as expected')
+        received_first_name = json_response['account']['name']['firstName']
+        received_last_name = json_response['account']['name']['lastName']
+
+        expected_first_name = expected_account_response['account']['name']['firstName']
+        expected_last_name = expected_account_response['account']['name']['lastName']
+
+        self.assertEqual(received_first_name, expected_first_name, 'First name received is not as expected')
+
+        self.assertEqual(received_last_name, expected_last_name, 'Last name received is not as expected')
 
 
 if __name__ == '__main__':
