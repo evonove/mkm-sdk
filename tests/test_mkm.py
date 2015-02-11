@@ -28,5 +28,3 @@ class MkmTest(unittest.TestCase):
         first_game_received = json_response['game']
 
         self.assertEqual(first_game_received, self.expected_response['game'], 'Game received is not correct')
-
-

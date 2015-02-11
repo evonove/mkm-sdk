@@ -1,6 +1,4 @@
 import unittest
-import os
-from mkmsdk.MKMOAuth1 import BuggedOAuth1
 from mkmsdk.api import Api
 
 
