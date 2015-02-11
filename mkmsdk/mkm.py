@@ -19,8 +19,4 @@ class Mkm:
         resolver = resolvers.SimpleResolver()
         return resolver.resolve(api_map=self.api_map, **kwargs)
 
-    def get_resolver(self):
-        return resolvers.SimpleResolver()
-
-
 mkm = Mkm(api_map=default_api_map)

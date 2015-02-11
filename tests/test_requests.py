@@ -14,4 +14,3 @@ class RequestsTest(unittest.TestCase):
         response = api.request(self.url, self.method)
 
         self.assertEqual(response.status_code, 200)
-
