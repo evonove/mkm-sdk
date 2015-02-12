@@ -87,7 +87,3 @@ class OAuthTest(unittest.TestCase):
         self.assertEqual(received_first_name, expected_first_name, 'First name received is not as expected')
 
         self.assertEqual(received_last_name, expected_last_name, 'Last name received is not as expected')
-
-
-if __name__ == '__main__':
-    unittest.main()

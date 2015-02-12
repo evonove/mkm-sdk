@@ -1,5 +1,5 @@
 import unittest
-from mkmsdk.api import Api
+from unittest import mock
 
 
 class RequestsTest(unittest.TestCase):
@@ -8,7 +8,7 @@ class RequestsTest(unittest.TestCase):
         self.method = 'get'
 
     def test_request_works(self):
-        api = Api()
-        response = api.request(self.url, self.method)
+        with mock.patch('mkmsdk.api.Api.request') as mock_request:
+            mock_request(self.url, self.method)
 
-        self.assertEqual(response.status_code, 200)
+        mock_request.assert_called_once_with(self.url, self.method)

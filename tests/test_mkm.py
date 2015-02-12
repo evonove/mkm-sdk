@@ -6,14 +6,14 @@ from mkmsdk.mkm import mkm
 class MkmTest(unittest.TestCase):
 
     def setUp(self):
-        self.expected_response = {'game':
-                                    [
-                                        {'idGame': 1, 'name': 'Magic the Gathering'},
-                                        {'idGame': 3, 'name': 'Yugioh'},
-                                        {'idGame': 2, 'name': 'World of Warcraft TCG'},
-                                        {'idGame': 5, 'name': 'The Spoils'}
-                                    ]
-                                 }
+        self.expected_response = {
+            'game': [
+                {'idGame': 1, 'name': 'Magic the Gathering'},
+                {'idGame': 3, 'name': 'Yugioh'},
+                {'idGame': 2, 'name': 'World of Warcraft TCG'},
+                {'idGame': 5, 'name': 'The Spoils'}
+            ]
+        }
 
     def test_simple_call(self):
         with mock.patch('mkmsdk.resolvers.SimpleResolver.resolve') as mock_resolve:
