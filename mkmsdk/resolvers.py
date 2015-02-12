@@ -1,4 +1,5 @@
 from mkmsdk.api import Api
+from . import exceptions
 
 
 class SimpleResolver:
@@ -12,7 +13,10 @@ class SimpleResolver:
         url, method = api_map['url'], api_map['method']
         url_entry = url_entry or {}
 
-        url = url.format(**url_entry)
+        try:
+            url = url.format(**url_entry)
+        except KeyError as ke:
+            raise exceptions.MissingParam('Missing url sdk parameter: %s' % str(ke))
         self.url = url
         self.method = method
 
