@@ -1,6 +1,7 @@
 import http
 import unittest
 import requests
+import os
 from requests_oauthlib import OAuth1
 from mkmsdk.MKMOAuth1 import BuggedOAuth1
 
@@ -8,10 +9,10 @@ from mkmsdk.MKMOAuth1 import BuggedOAuth1
 class OAuthTest(unittest.TestCase):
     def setUp(self):
         self.url = 'https://www.mkmapi.eu/ws/v1.1/output.json/account'
-        self.app_token = 'Xv48wJ1XwyaQFOcI'
-        self.app_secret = 'fTvgiZYyly6OHYDExKuaFhwTwTsdJslv'
-        self.access_token = '81Q5MJKgNe9Lh3m7bGH2li8R8ycaGvtI'
-        self.access_token_secret = 'uq4GN4Yn5pAZBrsZ7PZKHFSYguquGUbC'
+        self.app_token = os.environ.get('MKM_APP_TOKEN')
+        self.app_secret = os.environ.get('MKM_APP_SECRET')
+        self.access_token = os.environ.get('MKM_ACCESS_TOKEN')
+        self.access_token_secret = os.environ.get('MKM_ACCESS_TOKEN_SECRET')
 
         self.auth = BuggedOAuth1(self.app_token,
                                  client_secret=self.app_secret,
