@@ -82,9 +82,15 @@ _API_MAP = {
                 },
 
                 'products': {
-                    'url': '/products/{name}/{game}/{language}/{match}',  # An optional parameter can be inserted for pagination
+                    'url': '/products/{name}/{game}/{language}/{match}',
                     'method': 'get',
                     'description': 'Returns products specified by their name, game and language'
+                },
+
+                'products_paginated': {
+                  'url': '/products/{name}/{game}/{language}/{match}/{start}',
+                  'method': 'get',
+                  'description': 'Returns paginated products specified by their name, game and language'
                 },
 
                 'expansion': {
@@ -100,9 +106,15 @@ _API_MAP = {
                 },
 
                 'articles': {
-                    'url': '/articles/{product}',  # An optional parameter can be inserted for pagination
+                    'url': '/articles/{product}',
                     'method': 'get',
-                    'description': 'Returns Article entities for available articles specified by their product ID'
+                    'description': 'Returns Articles entities for available articles specified by their product ID'
+                },
+
+                'articles_paginated': {
+                    'url': '/articles/{product}/{start}',
+                    'method': 'get',
+                    'description': 'Returns paginated Article for available articles specified by their product ID'
                 },
 
                 'user': {
@@ -112,10 +124,17 @@ _API_MAP = {
                 },
 
                 'articles_user': {
-                    'url': '/articles/user/{user}',  # An optional parameter can be inserted for pagination
+                    'url': '/articles/user/{user}',
                     'method': 'get',
-                    'description': 'Returns Article entities for available articles from a specified user by ID or name'
+                    'description': 'Returns Article entities for available articles from a specified user ID or name'
+                },
+
+                'articles_user_paginated': {
+                    'url': '/articles/user/{user}/{start}',
+                    'method': 'get',
+                    'description': 'Returns paginated Article for available articles from a specified user ID or name'
                 }
+
             },
 
             'order_management': {
@@ -139,9 +158,15 @@ _API_MAP = {
                 },
 
                 'orders': {
-                    'url': '/orders/{actor}/{state}',  # An optional parameter can be inserted for pagination
+                    'url': '/orders/{actor}/{state}',
                     'method': 'get',
                     'description': 'Returns the complete collection of filtered orders.'
+                },
+
+                'orders_paginated': {
+                    'url': '/orders/{actor}/{state}/{start}',
+                    'method': 'get',
+                    'description': 'Returns the paginated complete collection of filtered orders.'
                 }
             },
 
@@ -193,9 +218,15 @@ _API_MAP = {
             'stock_management': {
 
                 'get_stock': {
-                    'url': '/stock',  # An optional parameter can be inserted for pagination
+                    'url': '/stock',
                     'method': 'get',
                     'description': 'Returns the Article entities in the authenticated user`s stock'
+                },
+
+                'get_stock_paginated': {
+                    'url': '/stock/{start}',
+                    'method': 'get',
+                    'description': 'Returns the paginated Article entities in the authenticated user`s stock'
                 },
 
                 'post_stock': {
