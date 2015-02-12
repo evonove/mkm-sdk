@@ -1,13 +1,17 @@
 import os
+from .api_map import _API_MAP
 from . import exceptions
 from requests import request
-from mkmsdk.MKMOAuth1 import BuggedOAuth1
+from .MKMOAuth1 import BuggedOAuth1
 
 
 class Api:
 
-    def __init__(self):
-        self.base_endpoint = 'https://www.mkmapi.eu/ws/v1.1/output.json'
+    def __init__(self, sandbox_mode=False):
+        if sandbox_mode:
+            self.base_endpoint = _API_MAP['current']['api_sandbox_root']
+        else:
+            self.base_endpoint = _API_MAP['current']['api_root']
 
     def request(self, url, method, **kwargs):
 

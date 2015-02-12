@@ -1,12 +1,12 @@
-from mkmsdk.api import Api
+from .api import Api
 from . import exceptions
 
 
 class SimpleResolver:
-    def __init__(self):
+    def __init__(self, sandbox_mode):
         self.url = ''
         self.method = ''
-        self.api = Api()
+        self.api = Api(sandbox_mode=sandbox_mode)
 
     def setup(self, api_map=None, url_entry=None):
 

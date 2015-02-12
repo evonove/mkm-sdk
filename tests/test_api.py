@@ -7,13 +7,18 @@ from mkmsdk import exceptions
 class ApiTest(unittest.TestCase):
 
     def setUp(self):
-        self.base_endpoint = 'https://www.mkmapi.eu/ws/v1.1/output.json'
+        self.live_base_endpoint = 'https://www.mkmapi.eu/ws/v1.1/output.json'
+        self.sandbox_base_endpoint = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json'
         self.new_api = Api()
+        self.new_sandbox_api = Api(sandbox_mode=True)
         self.response = mock.Mock()
         self.response.content = {}
 
     def test_endpoint(self):
-        self.assertEqual(self.new_api.base_endpoint, self.base_endpoint)
+        self.assertEqual(self.new_api.base_endpoint, self.live_base_endpoint)
+
+    def test_sandbox_mode(self):
+        self.assertEqual(self.new_sandbox_api.base_endpoint, self.sandbox_base_endpoint)
 
     def test_good_request(self):
         response = self.new_api.request('/account', 'get')

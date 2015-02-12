@@ -1,6 +1,6 @@
 import unittest
 from unittest import mock
-from mkmsdk.mkm import mkm
+from mkmsdk.mkm import mkm, mkm_sandbox
 
 
 class MkmTest(unittest.TestCase):
@@ -28,3 +28,7 @@ class MkmTest(unittest.TestCase):
         first_game_received = json_response['game']
 
         self.assertEqual(first_game_received, self.expected_response['game'], 'Game received is not correct')
+
+    def test_sandbox_url(self):
+        response = mkm_sandbox.account_management.account()
+        self.assertEqual(response.request.url, 'https://sandbox.mkmapi.eu/ws/v1.1/output.json')
