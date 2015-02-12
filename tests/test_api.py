@@ -1,6 +1,7 @@
 import unittest
 from unittest import mock
 from mkmsdk.api import Api
+from mkmsdk import exceptions
 
 
 class ApiTest(unittest.TestCase):
@@ -8,11 +9,84 @@ class ApiTest(unittest.TestCase):
     def setUp(self):
         self.base_endpoint = 'https://www.mkmapi.eu/ws/v1.1/output.json'
         self.new_api = Api()
-        self.new_api.request = mock.Mock()
+        self.response = mock.Mock()
+        self.response.content = {}
 
     def test_endpoint(self):
         self.assertEqual(self.new_api.base_endpoint, self.base_endpoint)
 
-    def test_get(self):
-        self.new_api.request('/account', 'get')
-        self.new_api.request.assert_called_once_with('/account', 'get')
+    def test_good_request(self):
+        response = self.new_api.request('/account', 'get')
+        self.assertEqual(response.status_code, 200)
+
+    def test_redirection(self):
+        self.response.status_code = 301
+        self.assertRaises(exceptions.Redirection,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+        self.response.status_code = 302
+        self.assertRaises(exceptions.Redirection,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+        self.response.status_code = 303
+        self.assertRaises(exceptions.Redirection,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+        self.response.status_code = 307
+        self.assertRaises(exceptions.Redirection,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_bad_request(self):
+        self.response.status_code = 400
+        self.assertRaises(exceptions.BadRequest,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_unauthorized_access(self):
+        self.response.status_code = 401
+        self.assertRaises(exceptions.UnauthorizedAccess,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_forbidden_access(self):
+        self.response.status_code = 403
+        self.assertRaises(exceptions.ForbiddenAccess,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_resource_not_found(self):
+        self.response.status_code = 404
+        self.assertRaises(exceptions.ResourceNotFound,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_method_not_allowed(self):
+        self.response.status_code = 405
+        self.assertRaises(exceptions.MethodNotAllowed,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_resource_conflict(self):
+        self.response.status_code = 409
+        self.assertRaises(exceptions.ResourceConflict,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_resource_gone(self):
+        self.response.status_code = 410
+        self.assertRaises(exceptions.ResourceGone,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_resource_invalid(self):
+        self.response.status_code = 422
+        self.assertRaises(exceptions.ResourceInvalid,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_client_error(self):
+        self.response.status_code = 480
+        self.assertRaises(exceptions.ClientError,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_server_error(self):
+        self.response.status_code = 545
+        self.assertRaises(exceptions.ServerError,
+                          self.new_api.handle_response, self.response, self.response.content)
+
+    def test_unknown_error(self):
+        self.response.status_code = 1001
+        self.assertRaises(exceptions.ConnectionError,
+                          self.new_api.handle_response, self.response, self.response.content)
