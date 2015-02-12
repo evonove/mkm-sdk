@@ -5,7 +5,7 @@ setup(
     name='mkmsdk',
     author='Evonove',
     author_email='dev@evonove.it',
-    packages=['mkmsdk'],
+    packages=['mkmsdk', 'tests'],
     scripts=[],
     url='https://evonove.it',
     license='MIT',
