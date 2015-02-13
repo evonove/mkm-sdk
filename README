@@ -13,4 +13,4 @@ For the SDK to work properly you have to set four environment variables:
 
     mkm.account_management.account()
 
-    mkm.market_place.user(url_entry={'user': 'simpleUser'})
+    mkm.market_place.user(user='SimpleUser')
