@@ -37,3 +37,4 @@ output/*/index.html
 docs/_build
 # Backup files
 *~
+.env
