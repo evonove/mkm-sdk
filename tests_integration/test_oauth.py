@@ -1,12 +1,13 @@
 import http
-import unittest
 import requests
 import os
 from requests_oauthlib import OAuth1
 from mkmsdk.MKMOAuth1 import BuggedOAuth1
 
+from . import IntegrationTest
 
-class OAuthTest(unittest.TestCase):
+
+class OAuthTest(IntegrationTest):
     def setUp(self):
         self.url = 'https://www.mkmapi.eu/ws/v1.1/output.json/account'
         self.app_token = os.environ.get('MKM_APP_TOKEN')
@@ -30,7 +31,6 @@ class OAuthTest(unittest.TestCase):
         """
         Checks if response from server is not negative
         """
-
         r = requests.get(self.url, auth=self.auth)
 
         self.assertEqual(r.status_code, http.client.OK)
@@ -39,7 +39,6 @@ class OAuthTest(unittest.TestCase):
         """
         Checks if the account entity received is as expected
         """
-
         expected_account_response = {'account':
                                          {
                                              'accountBalance': 0,

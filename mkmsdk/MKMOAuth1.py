@@ -4,6 +4,9 @@ from urllib.parse import unquote
 
 
 class BuggedOAuth1(OAuth1):
+    """
+
+    """
     def __call__(self, r):
         r = super(BuggedOAuth1, self).__call__(r)
 

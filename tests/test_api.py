@@ -20,10 +20,6 @@ class ApiTest(unittest.TestCase):
     def test_sandbox_mode(self):
         self.assertEqual(self.new_sandbox_api.base_endpoint, self.sandbox_base_endpoint)
 
-    def test_good_request(self):
-        response = self.new_api.request('/account', 'get')
-        self.assertEqual(response.status_code, 200)
-
     def test_redirection(self):
         self.response.status_code = 301
         self.assertRaises(exceptions.Redirection,

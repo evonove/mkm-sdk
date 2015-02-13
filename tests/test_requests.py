@@ -8,6 +8,9 @@ class RequestsTest(unittest.TestCase):
         self.method = 'get'
 
     def test_request_works(self):
+        """
+
+        """
         with mock.patch('mkmsdk.api.Api.request') as mock_request:
             mock_request(self.url, self.method)
 
