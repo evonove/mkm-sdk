@@ -1,6 +1,7 @@
 from requests_oauthlib import OAuth1
 from requests.utils import to_native_string
-from urllib.parse import unquote
+from six.moves.urllib.parse import unquote
+
 
 
 class BuggedOAuth1(OAuth1):

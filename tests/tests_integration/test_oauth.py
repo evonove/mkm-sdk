@@ -1,4 +1,3 @@
-import http
 import requests
 import os
 from requests_oauthlib import OAuth1
@@ -33,7 +32,7 @@ class OAuthTest(IntegrationTest):
         """
         r = requests.get(self.url, auth=self.auth)
 
-        self.assertEqual(r.status_code, http.client.OK)
+        self.assertEqual(r.status_code, 200)
 
     def test_account_entity_is_as_expected(self):
         """

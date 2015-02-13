@@ -1,5 +1,5 @@
 import unittest
-from unittest import mock
+from ..compat import mock
 
 
 class RequestsTest(unittest.TestCase):

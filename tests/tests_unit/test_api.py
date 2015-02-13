@@ -1,7 +1,8 @@
 import unittest
-from unittest import mock
 from mkmsdk.api import Api
 from mkmsdk import exceptions
+
+from ..compat import mock
 
 
 class ApiTest(unittest.TestCase):
