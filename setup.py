@@ -3,6 +3,7 @@
 from distutils.core import setup
 setup(
     name='mkmsdk',
+    version='0.1.0',
     author='Evonove',
     author_email='dev@evonove.it',
     packages=['mkmsdk', 'tests'],
