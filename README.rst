@@ -9,6 +9,7 @@ To install:
     pip install mkmsdk
 
 For the SDK to work properly you have to set four environment variables:
+
 * MKM_APP_TOKEN
 * MKM_APP_SECRET
 * MKM_ACCESS_TOKEN
