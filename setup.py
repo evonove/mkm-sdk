@@ -12,13 +12,14 @@ setup(
     license='MIT',
     description='MagicKardMarket base sdk.',
     long_description="""
-    MagicKardMarket sdk with use of some endpoints.
+    Magic Kard Market sdk with use of some endpoints.
     """,
     install_requires=['requests', 'requests_oauthlib'],
     classifiers=[
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Operating System :: OS Independent',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],

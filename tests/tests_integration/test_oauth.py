@@ -1,7 +1,7 @@
 import requests
 import os
 from requests_oauthlib import OAuth1
-from mkmsdk.MKMOAuth1 import BuggedOAuth1
+from mkmsdk.MKMOAuth1 import MKMOAuth1
 
 from . import IntegrationTest
 
@@ -14,7 +14,7 @@ class OAuthTest(IntegrationTest):
         self.access_token = os.environ.get('MKM_ACCESS_TOKEN')
         self.access_token_secret = os.environ.get('MKM_ACCESS_TOKEN_SECRET')
 
-        self.auth = BuggedOAuth1(self.app_token,
+        self.auth = MKMOAuth1(self.app_token,
                                  client_secret=self.app_secret,
                                  resource_owner_key=self.access_token,
                                  resource_owner_secret=self.access_token_secret,
@@ -40,35 +40,11 @@ class OAuthTest(IntegrationTest):
         """
         expected_account_response = {'account':
                                          {
-                                             'accountBalance': 0,
-                                             'onVacation': False,
-                                             'idDisplayLanguage': 1,
-                                             'articlesInShoppingCart': 0,
-                                             'isCommercial': 0,
                                              'name':
                                                  {
                                                      'lastName': 'Cerza',
                                                      'firstName': 'Silvano'
-                                                 },
-                                             'country': 'IT',
-                                             'sellCount': 0,
-                                             'shipsFast': 0,
-                                             'reputation': 0,
-                                             'username': 'Alien1993',
-                                             'unreadMessages': 0,
-                                             'bankRecharge': 0,
-                                             'idUser': 882784,
-                                             'address':
-                                                 {
-                                                     'street': 'Via Padre Camillo Torres 25',
-                                                     'zip': '06063',
-                                                     'city': 'Magione',
-                                                     'name': 'Silvano Cerza',
-                                                     'country': 'IT',
-                                                     'extra': ''
-                                                 },
-                                             'paypalRecharge': 0,
-                                             'riskGroup': 1
+                                                 }
                                          }
                                     }
 

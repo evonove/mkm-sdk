@@ -4,12 +4,13 @@ from six.moves.urllib.parse import unquote
 
 
 
-class BuggedOAuth1(OAuth1):
+class MKMOAuth1(OAuth1):
     """
 
     """
+
     def __call__(self, r):
-        r = super(BuggedOAuth1, self).__call__(r)
+        r = super(MKMOAuth1, self).__call__(r)
 
         r.prepare_headers(r.headers)
 
@@ -23,6 +24,12 @@ class BuggedOAuth1(OAuth1):
     def decode_signature(given_header):
         """
         Decodes the signature given an header
+
+        Parameters:
+            `given_header`: Authorization header
+
+        Return:
+            `authorization_string`: Returns a string of the decoded signature
         """
 
         authorization_byte = given_header['Authorization']
