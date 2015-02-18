@@ -6,7 +6,6 @@ Magic Kard Market Python SDK
 
 .. image:: https://readthedocs.org/projects/mkm-sdk/badge/?version=latest
     :target: http://mkm-sdk.readthedocs.org/en/latest/
-<<<<<<< HEAD
 
 A simple SDK for dedicated apps working with Magic Kard Market.
 
@@ -17,9 +16,6 @@ Requirements
 * Requests
 * Requests_OAuthlib
 
-=======
-    
->>>>>>> 04caf2557b4e3baa1246fea16490fddea95cb502
 Setup
 =====
 
