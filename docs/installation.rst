@@ -13,35 +13,3 @@ authorization to make requests. You can find them in your Magic Kard Market acco
 * MKM_APP_SECRET
 * MKM_ACCESS_TOKEN
 * MKM_ACCESS_TOKEN_SECRET
-
-
-Linux & Mac OS X
-~~~~~~~~~~~~~~~~
-
-From the command line::
-
-    export MKM_APP_TOKEN=Xv59wJ6XwyaQFOhI
-
-    export MKM_APP_SECRET=fTvgiZGgly6OHYDExKxrFhwTwTsdJsly
-
-    export MKM_ACCESS_TOKEN=63Q0MJKgNe9LhF57bGH2li85HycaGvtI
-
-    export MKM_ACCESS_TOKEN_SECRET=uq8GN4Yn5pZABrsZ7PZKHFYTguquGUbC
-
-This won't set them permanently but only until you close the shell.
-
-
-Windows
-~~~~~~~
-
-From the command prompt::
-
-    setx MKM_APP_TOKEN "Xv59wJ6XwyaQFOhI"
-
-    setx MKM_APP_SECRET "fTvgiZGgly6OHYDExKxrFhwTwTsdJsly"
-
-    setx MKM_ACCESS_TOKEN "63Q0MJKgNe9LhF57bGH2li85HycaGvtI"
-
-    setx MKM_ACCESS_TOKEN_SECRET "uq8GN4Yn5pZABrsZ7PZKHFYTguquGUbC"
-
-You need to restart the command prompt for the variables to work.
