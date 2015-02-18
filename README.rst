@@ -1,6 +1,9 @@
 Magic Kard Market Python SDK
 ============================
 
+.. image:: https://readthedocs.org/projects/mkm-sdk/badge/?version=latest
+    :target: http://mkm-sdk.readthedocs.org/en/latest/
+
 Setup
 -----
 
