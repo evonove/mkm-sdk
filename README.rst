@@ -6,6 +6,12 @@ Magic Kard Market Python SDK
 
 .. image:: https://readthedocs.org/projects/mkm-sdk/badge/?version=latest
     :target: http://mkm-sdk.readthedocs.org/en/latest/
+    
+.. image:: https://coveralls.io/repos/evonove/mkm-sdk/badge.svg
+  :target: https://coveralls.io/r/evonove/mkm-sdk
+
+.. image:: https://travis-ci.org/evonove/mkm-sdk.svg
+    :target: https://travis-ci.org/evonove/mkm-sdk
 
 A simple SDK for dedicated apps working with Magic Kard Market.
 
