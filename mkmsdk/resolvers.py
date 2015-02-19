@@ -21,6 +21,11 @@ class SimpleResolver:
             `kwargs`: Optional additional parameters to be attached to the url
         """
 
+        if api_map is None:
+            raise Exception('Resolve must be called with `api_map` argument')
+        elif api_map.get('url') is None or api_map.get('method') is None:
+            raise Exception('Resolve must be called with a map with `url` and `method`')
+
         url, method = api_map['url'], api_map['method']
 
         url_entry = {}

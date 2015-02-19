@@ -1,8 +1,9 @@
-import os
-from .api_map import _API_MAP
-from . import exceptions
 from requests import request
+
+from . import exceptions
+from . import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
 from .MKMOAuth1 import MKMOAuth1
+from .api_map import _API_MAP
 
 
 class Api:
@@ -53,16 +54,11 @@ class Api:
             `auth`: Returns an instance of `MKMOAuth1` with `url` as realm
         """
 
-
-        try:
-            auth = MKMOAuth1(os.environ['MKM_APP_TOKEN'],
-                                client_secret=os.environ['MKM_APP_SECRET'],
-                                resource_owner_key=os.environ['MKM_ACCESS_TOKEN'],
-                                resource_owner_secret=os.environ['MKM_ACCESS_TOKEN_SECRET'],
-                                realm=url)
-        except KeyError:
-            raise exceptions.MissingConfig('You have to set MKM env vars')
-        return auth
+        return MKMOAuth1(get_mkm_app_token(),
+                         client_secret=get_mkm_app_secret(),
+                         resource_owner_key=get_mkm_access_token(),
+                         resource_owner_secret=get_mkm_access_token_secret(),
+                         realm=url)
 
     def handle_response(self, response, content):
         """
