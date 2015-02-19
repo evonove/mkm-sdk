@@ -7,4 +7,4 @@ if __name__ == "__main__":
     tests = loader.discover(start_dir='.')
     testRunner = unittest.runner.TextTestRunner()
     result = testRunner.run(tests)
-    sys.exit(len(result.errors))
+    sys.exit(len(result.errors)+len(result.failures))

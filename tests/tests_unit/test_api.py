@@ -1,8 +1,9 @@
 import unittest
+from ..compat import mock
+
 from mkmsdk.api import Api
 from mkmsdk import exceptions
-
-from ..compat import mock
+from mkmsdk import get_mkm_app_secret
 
 
 class ApiTest(unittest.TestCase):
@@ -14,6 +15,11 @@ class ApiTest(unittest.TestCase):
         self.new_sandbox_api = Api(sandbox_mode=True)
         self.response = mock.Mock()
         self.response.content = {}
+
+    def test_missing_env_var_raise_exception_correctly(self):
+        with mock.patch('mkmsdk.os') as os_mocked:
+            os_mocked.environ = {}
+            self.assertRaises(exceptions.MissingConfig, get_mkm_app_secret)
 
     def test_endpoint(self):
         self.assertEqual(self.new_api.base_endpoint, self.live_base_endpoint)
