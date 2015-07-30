@@ -19,9 +19,9 @@ Requirements
 ============
 
 * Python 2.7/3.4
-* [Requests](http://docs.python-requests.org/)
-* [Requests_OAuthlib](https://github.com/requests/requests-oauthlib)
-* [six](https://pypi.python.org/pypi/six)
+* `Requests <http://docs.python-requests.org/>`_
+* `Requests_OAuthlib <https://github.com/requests/requests-oauthlib/>`_
+* `six <https://pypi.python.org/pypi/six/>`_
 
 Setup
 =====
