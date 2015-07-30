@@ -19,8 +19,8 @@ Requirements
 ============
 
 * Python 2.7/3.4
-* Requests
-* Requests_OAuthlib
+* [Requests](http://docs.python-requests.org/)
+* [Requests_OAuthlib](https://github.com/requests/requests-oauthlib)
 
 Setup
 =====
@@ -32,10 +32,10 @@ From the command line::
 For the SDK to work properly you need to create four environment variables holding the tokens necessary to create the
 authorization to make requests. You can find them in your Magic Kard Market account page under the apps section.
 
-* MKM_APP_TOKEN
-* MKM_APP_SECRET
-* MKM_ACCESS_TOKEN
-* MKM_ACCESS_TOKEN_SECRET
+* ``MKM_APP_TOKEN``
+* ``MKM_APP_SECRET``
+* ``MKM_ACCESS_TOKEN``
+* ``MKM_ACCESS_TOKEN_SECRET``
 
 
 Usage
