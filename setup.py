@@ -35,7 +35,7 @@ setup(
     long_description="""
     Magic Kard Market sdk with use of some endpoints
     """,
-    install_requires=['requests', 'requests_oauthlib'],
+    install_requires=['requests', 'requests_oauthlib', 'six'],
     classifiers=[
         'Intended Audience :: Developers',
         'Natural Language :: English',
