@@ -1,6 +1,5 @@
-from . import IntegrationTest
-
 from mkmsdk.api import Api
+from . import IntegrationTest
 
 
 class ApiTest(IntegrationTest):

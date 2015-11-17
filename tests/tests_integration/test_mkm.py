@@ -1,11 +1,14 @@
-from . import IntegrationTest
-
 from mkmsdk.mkm import mkm, mkm_sandbox
+from . import IntegrationTest
 
 
 class MkmTest(IntegrationTest):
-    def setUp(self):
-        self.expected_response = {
+
+    def test_response_is_as_expected(self):
+        response = mkm.market_place.games()
+        json_response = response.json()
+
+        expected_response = {
             'game': [
                 {'idGame': 1, 'name': 'Magic the Gathering'},
                 {'idGame': 3, 'name': 'Yugioh'},
@@ -14,13 +17,9 @@ class MkmTest(IntegrationTest):
             ]
         }
 
-    def test_response_is_as_expected(self):
-        response = mkm.market_place.games()
-        json_response = response.json()
-
         first_game_received = json_response['game']
 
-        self.assertEqual(first_game_received, self.expected_response['game'], 'Game received is not correct')
+        self.assertEqual(first_game_received, expected_response['game'], 'Game received is not correct')
 
     def test_sandbox_url(self):
         response = mkm_sandbox.account_management.account()

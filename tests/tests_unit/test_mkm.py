@@ -1,7 +1,7 @@
 import unittest
-from mkmsdk.mkm import mkm
-
 from ..compat import mock
+
+from mkmsdk.mkm import mkm
 
 class MkmTest(unittest.TestCase):
 

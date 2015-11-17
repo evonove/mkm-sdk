@@ -1,5 +1,6 @@
-from collections import namedtuple
 import unittest
+from collections import namedtuple
+
 from mkmsdk.exceptions import ConnectionError, Redirection, ResourceNotFound, UnauthorizedAccess, MissingParam
 
 

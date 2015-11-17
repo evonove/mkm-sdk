@@ -1,8 +1,9 @@
 import requests
 import os
-from requests_oauthlib import OAuth1
-from mkmsdk.MKMOAuth1 import MKMOAuth1
 
+from requests_oauthlib import OAuth1
+
+from mkmsdk.MKMOAuth1 import MKMOAuth1
 from . import IntegrationTest
 
 
