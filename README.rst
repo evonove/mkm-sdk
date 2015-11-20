@@ -56,3 +56,18 @@ This will return a `Response <http://docs.python-requests.org/en/latest/api/?hig
 object that contains the response from the server.
 
 To get a json you can call response.json().
+
+Tests
+=====
+
+Integration tests will be skipped if the four environment variables are not set.
+
+* ``MKM_APP_TOKEN``
+* ``MKM_APP_SECRET``
+* ``MKM_ACCESS_TOKEN``
+* ``MKM_ACCESS_TOKEN_SECRET``
+
+There are also other two variable to be set if you don't want to skip your account integration tests.
+
+* ``MKM_ACCOUNT_LAST_NAME``
+* ``MKM_ACCOUNT_FIRST_NAME``

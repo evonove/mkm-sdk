@@ -1,10 +1,11 @@
-import requests
+import unittest
 import os
 
+import requests
 from requests_oauthlib import OAuth1
 
 from mkmsdk.MKMOAuth1 import MKMOAuth1
-from . import IntegrationTest
+from . import IntegrationTest, skip_account_integration
 
 
 class OAuthTest(IntegrationTest):
@@ -35,16 +36,20 @@ class OAuthTest(IntegrationTest):
 
         self.assertEqual(r.status_code, 200)
 
+    @unittest.skipIf(skip_account_integration(), "Missing env vars, skipping account integration test")
     def test_account_entity_is_as_expected(self):
         """
         Checks if the account entity received is as expected
         """
+        last_name = os.environ['MKM_ACCOUNT_LAST_NAME']
+        first_name =  os.environ['MKM_ACCOUNT_FIRST_NAME']
+
         expected_account_response = {'account':
                                          {
                                              'name':
                                                  {
-                                                     'lastName': 'Cerza',
-                                                     'firstName': 'Silvano'
+                                                     'lastName': last_name,
+                                                     'firstName': first_name
                                                  }
                                          }
                                     }
