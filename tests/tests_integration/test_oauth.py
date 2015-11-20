@@ -9,7 +9,7 @@ from . import IntegrationTest
 
 class OAuthTest(IntegrationTest):
     def setUp(self):
-        self.url = 'https://www.mkmapi.eu/ws/v1.1/output.json/account'
+        self.url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/account'
         self.app_token = os.environ.get('MKM_APP_TOKEN')
         self.app_secret = os.environ.get('MKM_APP_SECRET')
         self.access_token = os.environ.get('MKM_ACCESS_TOKEN')

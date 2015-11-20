@@ -4,7 +4,7 @@ from . import IntegrationTest
 
 class ApiTest(IntegrationTest):
     def setUp(self):
-        self.new_api = Api()
+        self.new_api = Api(sandbox_mode=True)
 
     def test_good_request(self):
         response = self.new_api.request('/account', 'get')
