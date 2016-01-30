@@ -5,42 +5,71 @@ import requests
 from requests_oauthlib import OAuth1
 
 from mkmsdk.MKMOAuth1 import MKMOAuth1
-from . import IntegrationTest, skip_account_integration
+from mkmsdk.MKMClient import MKMClient
+from . import IntegrationTest, skip_account_integration, skip_dedicated_app_integration
 
 
 class OAuthTest(IntegrationTest):
-    def setUp(self):
-        self.url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/account'
-        self.app_token = os.environ.get('MKM_APP_TOKEN')
-        self.app_secret = os.environ.get('MKM_APP_SECRET')
-        self.access_token = os.environ.get('MKM_ACCESS_TOKEN')
-        self.access_token_secret = os.environ.get('MKM_ACCESS_TOKEN_SECRET')
-
-        self.auth = MKMOAuth1(self.app_token,
-                                 client_secret=self.app_secret,
-                                 resource_owner_key=self.access_token,
-                                 resource_owner_secret=self.access_token_secret,
-                                 realm=self.url)
 
     def test_oauth_is_received(self):
         """
         Checks if OAuth1 is received
         """
-        self.assertTrue(isinstance(self.auth, OAuth1))
+        url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/games'
+        auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
+                         client_secret=os.environ.get('MKM_APP_SECRET'),
+                         resource_owner_key=os.environ.get('MKM_ACCESS_TOKEN'),
+                         resource_owner_secret=os.environ.get('MKM_ACCESS_TOKEN_SECRET'),
+                         realm=url)
 
-    def test_oauth1_is_correct(self):
+        self.assertTrue(isinstance(auth, OAuth1))
+
+    @unittest.skipIf(not skip_dedicated_app_integration(), 'Access Token and Access Token Secret are not empty')
+    def test_widget_app_oauth1_is_correct(self):
         """
-        Checks if response from server is not negative
+        Checks if response from server is positive
         """
-        r = requests.get(self.url, auth=self.auth)
+        url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/games'
+        auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
+                         client_secret=os.environ.get('MKM_APP_SECRET'),
+                         resource_owner_key=os.environ.get('MKM_ACCESS_TOKEN'),
+                         resource_owner_secret=os.environ.get('MKM_ACCESS_TOKEN_SECRET'),
+                         realm=url,
+                         client_class=MKMClient)
+
+        r = requests.get(url, auth=auth)
 
         self.assertEqual(r.status_code, 200)
 
-    @unittest.skipIf(skip_account_integration(), "Missing env vars, skipping account integration test")
+    @unittest.skipIf(skip_dedicated_app_integration(), 'Access Token and Access Token Secret are empty')
+    def test_dedicated_app_oauth1_is_correct(self):
+        """
+        Checks if response from server is positive
+        """
+        url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/games'
+        auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
+                         client_secret=os.environ.get('MKM_APP_SECRET'),
+                         resource_owner_key=os.environ.get('MKM_ACCESS_TOKEN'),
+                         resource_owner_secret=os.environ.get('MKM_ACCESS_TOKEN_SECRET'),
+                         realm=url)
+
+        r = requests.get(url, auth=auth)
+
+        self.assertEqual(r.status_code, 200)
+
+    @unittest.skipIf(skip_account_integration(), 'Missing env vars')
+    @unittest.skipIf(skip_dedicated_app_integration(), 'Access Token and Access Token Secret are empty')
     def test_account_entity_is_as_expected(self):
         """
         Checks if the account entity received is as expected
         """
+        url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/account'
+        auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
+                         client_secret=os.environ.get('MKM_APP_SECRET'),
+                         resource_owner_key=os.environ.get('MKM_ACCESS_TOKEN'),
+                         resource_owner_secret=os.environ.get('MKM_ACCESS_TOKEN_SECRET'),
+                         realm=url)
+
         last_name = os.environ['MKM_ACCOUNT_LAST_NAME']
         first_name =  os.environ['MKM_ACCOUNT_FIRST_NAME']
 
@@ -54,7 +83,7 @@ class OAuthTest(IntegrationTest):
                                          }
                                     }
 
-        r = requests.get(self.url, auth=self.auth)
+        r = requests.get(url, auth=auth)
 
         json_response = r.json()
 

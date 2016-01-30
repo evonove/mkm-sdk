@@ -1,4 +1,9 @@
 import unittest
+
+from oauthlib.oauth1 import Client
+
+from mkmsdk.MKMClient import MKMClient
+from mkmsdk.MKMOAuth1 import MKMOAuth1
 from ..compat import mock
 
 from mkmsdk.api import Api
@@ -12,6 +17,32 @@ class ApiTest(unittest.TestCase):
         self.api = Api()
         self.response = mock.Mock()
         self.response.content = {}
+
+    def test_create_auth(self):
+        auth = self.api.create_auth('https://www.mkmapi.eu/ws/v1.1/output.json',
+                                    app_token='app_token',
+                                    app_secret='app_secret',
+                                    access_token='access_token',
+                                    access_token_secret='access_token_secret')
+
+        self.assertIsInstance(auth.client, Client)
+        self.assertEqual(auth.client.client_key, 'app_token')
+        self.assertEqual(auth.client.client_secret, 'app_secret')
+        self.assertEqual(auth.client.resource_owner_key, 'access_token')
+        self.assertEqual(auth.client.resource_owner_secret, 'access_token_secret')
+
+    def test_create_auth_with_empty_string_token(self):
+        auth = self.api.create_auth('https://www.mkmapi.eu/ws/v1.1/output.json',
+                                    app_token='app_token',
+                                    app_secret='app_secret',
+                                    access_token='',
+                                    access_token_secret='')
+
+        self.assertIsInstance(auth.client, MKMClient)
+        self.assertEqual(auth.client.client_key, 'app_token')
+        self.assertEqual(auth.client.client_secret, 'app_secret')
+        self.assertEqual(auth.client.resource_owner_key, '')
+        self.assertEqual(auth.client.resource_owner_secret, '')
 
     def test_missing_env_var_raise_exception_correctly(self):
         with mock.patch('mkmsdk.os') as os_mocked:
