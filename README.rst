@@ -13,7 +13,7 @@ Magic Kard Market Python SDK
 .. image:: https://travis-ci.org/evonove/mkm-sdk.svg
     :target: https://travis-ci.org/evonove/mkm-sdk
 
-A simple SDK for dedicated apps working with Magic Kard Market.
+A simple SDK for dedicated and widget apps working with Magic Kard Market.
 
 Requirements
 ============
@@ -39,6 +39,8 @@ authorization to make requests. You can find them in your Magic Kard Market acco
 * ``MKM_ACCESS_TOKEN_SECRET``
 
 
+`MKM_ACCESS_TOKEN` and `MKM_ACCESS_TOKEN_SECRET` need to be set to empty string if you want to use a widget app.
+
 Usage
 =====
 
@@ -55,6 +57,8 @@ A request works like this::
 This will return a `Response <http://docs.python-requests.org/en/latest/api/?highlight=response#requests.Response/>`_
 object that contains the response from the server.
 
+Note that only `market_place` requests work when using a widget app.
+
 To get a json you can call response.json().
 
 Tests
@@ -67,7 +71,9 @@ Integration tests will be skipped if the four environment variables are not set.
 * ``MKM_ACCESS_TOKEN``
 * ``MKM_ACCESS_TOKEN_SECRET``
 
-There are also other two variable to be set if you don't want to skip your account integration tests.
+There are also other two variable to be set if you don't want to skip your dedicated app's account integration tests.
 
 * ``MKM_ACCOUNT_LAST_NAME``
 * ``MKM_ACCOUNT_FIRST_NAME``
+
+Note that some tests will be skipped depending if `MKM_ACCESS_TOKEN` and `MKM_ACCESS_TOKEN_SECRET` are empty strings or not.
