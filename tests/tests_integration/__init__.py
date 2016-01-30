@@ -23,9 +23,12 @@ def skip_account_integration():
         return True
 
 def skip_dedicated_app_integration():
-    if (mkmsdk.get_mkm_access_token() == '' or mkmsdk.get_mkm_access_token_secret() == ''):
+    try:
+        os.environ['MKM_ACCESS_TOKEN'] == ''
+        os.environ['MKM_ACCESS_TOKEN_SECRET'] == ''
+        return False
+    except KeyError:
         return True
-    return False
 
 @unittest.skipIf(skip_integration(), 'Missing env vars, skipping integration test')
 class IntegrationTest(unittest.TestCase):
