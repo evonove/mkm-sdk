@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from mkmsdk.mkm import mkm_sandbox
 from . import IntegrationTest
 
@@ -12,7 +13,7 @@ class MkmTest(IntegrationTest):
             'game': [
                 {'idGame': 1, 'name': 'Magic the Gathering'},
                 {'idGame': 3, 'name': 'Yugioh'},
-                {'idGame': 6, 'name': 'Pokémon'},
+                {'idGame': 6, 'name': u'Pokémon'},
                 {'idGame': 2, 'name': 'World of Warcraft TCG'},
                 {'idGame': 5, 'name': 'The Spoils'}
             ]
