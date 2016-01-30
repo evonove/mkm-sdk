@@ -23,7 +23,9 @@ class MKMOAuth1(OAuth1):
     @staticmethod
     def decode_signature(given_header):
         """
-        Decodes the signature given an header
+        Decodes the signature given an header. This is done because MKM
+        expects an authorization header with different parameters encoding
+        specified in section 3.6 of OAuth 1 specification (RFC5849).
 
         Parameters:
             `given_header`: Authorization header

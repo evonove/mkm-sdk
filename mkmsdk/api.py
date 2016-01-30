@@ -1,5 +1,6 @@
 from requests import request
 
+from mkmsdk.MKMClient import MKMClient
 from . import exceptions
 from . import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
 from .MKMOAuth1 import MKMOAuth1
@@ -43,21 +44,42 @@ class Api:
         except exceptions.BadRequest as error:
             return {'error': error.content}
 
-    def create_auth(self, url):
+    def create_auth(self, url,
+                    app_token=None,
+                    app_secret=None,
+                    access_token=None,
+                    access_token_secret=None):
         """
-        Create authorization with MKMOAuth1
+        Create authorization with MKMOAuth1, if Access Token and Access Token Secret
+        are not found a custom Client is used.
+        This is done because MKM expects an authorization header with certain parameters
+        even if they're empty strings.
 
         Params:
             `url`: URL where request is submitted
+            `app_token`: use this app token instead of the one in env vars
+            `app_secret`: use this app secret instead of the one in env vars
+            `access_token`: use this access token instead of the one in env vars
+            `access_token_secret`: use this access token secret instead of the one in env vars
 
         Return:
             `auth`: Returns an instance of `MKMOAuth1` with `url` as realm
         """
 
-        return MKMOAuth1(get_mkm_app_token(),
-                         client_secret=get_mkm_app_secret(),
-                         resource_owner_key=get_mkm_access_token(),
-                         resource_owner_secret=get_mkm_access_token_secret(),
+        app_token = app_token if app_token != None else get_mkm_app_token()
+        app_secret = app_secret if app_secret != None else get_mkm_app_secret()
+        access_token = access_token if access_token != None else get_mkm_access_token()
+        access_token_secret = access_token_secret if access_token_secret != None else get_mkm_access_token_secret()
+        client = None
+
+        if not access_token and not access_token_secret:
+            client = MKMClient
+
+        return MKMOAuth1(app_token,
+                         client_secret=app_secret,
+                         resource_owner_key=access_token,
+                         resource_owner_secret=access_token_secret,
+                         client_class=client,
                          realm=url)
 
     def handle_response(self, response, content):
