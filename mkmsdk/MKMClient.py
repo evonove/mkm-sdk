@@ -22,7 +22,10 @@ class MKMClient(Client):
                 oauthParamExist = True
                 break
 
-        # We append the empty string oauth_token if it's not already there
+        # We append the empty string oauth_token if it's not already there since MKM expects
+        # the OAuth1 Header to have the parameter in any case, this has to be done otherwise
+        # the response will always be 401 Unauthorized
+        # Documentation: https://www.mkmapi.eu/ws/documentation/API:Auth_OAuthHeader
         if not oauthParamExist:
             parameters.append(('oauth_token', ''))
 

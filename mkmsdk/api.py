@@ -72,11 +72,9 @@ class Api:
         access_token = access_token if access_token != None else get_mkm_access_token()
         access_token_secret = access_token_secret if access_token_secret != None else get_mkm_access_token_secret()
 
-        """
-        If access_token and access_token_secret are empty strings a personalized OAuth1 Client is used.
-        This is done because that would mean the user is using a Widget Application and having empty strings
-        as tokens causes issues with the default Client
-        """
+        # If access_token and access_token_secret are empty strings a personalized OAuth1 Client is used.
+        # This is done because that would mean the user is using a Widget Application and having empty strings
+        # as tokens causes issues with the default Client
         if not access_token and not access_token_secret:
             client = MKMClient
         else:
