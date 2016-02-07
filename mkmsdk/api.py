@@ -1,6 +1,7 @@
 from requests import request
+from oauthlib.oauth1.rfc5849 import Client
 
-from mkmsdk.MKMClient import MKMClient
+from .MKMClient import MKMClient
 from . import exceptions
 from . import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
 from .MKMOAuth1 import MKMOAuth1
@@ -70,10 +71,16 @@ class Api:
         app_secret = app_secret if app_secret != None else get_mkm_app_secret()
         access_token = access_token if access_token != None else get_mkm_access_token()
         access_token_secret = access_token_secret if access_token_secret != None else get_mkm_access_token_secret()
-        client = None
 
+        """
+        If access_token and access_token_secret are empty strings a personalized OAuth1 Client is used.
+        This is done because that would mean the user is using a Widget Application and having empty strings
+        as tokens causes issues with the default Client
+        """
         if not access_token and not access_token_secret:
             client = MKMClient
+        else:
+            client = Client
 
         return MKMOAuth1(app_token,
                          client_secret=app_secret,

@@ -1,11 +1,9 @@
 import unittest
 
 from oauthlib.oauth1 import Client
-
-from mkmsdk.MKMClient import MKMClient
-from mkmsdk.MKMOAuth1 import MKMOAuth1
 from ..compat import mock
 
+from mkmsdk.MKMClient import MKMClient
 from mkmsdk.api import Api
 from mkmsdk import exceptions
 from mkmsdk import get_mkm_app_secret
