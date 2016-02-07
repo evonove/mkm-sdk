@@ -3,6 +3,7 @@ from ..compat import mock
 
 from mkmsdk.mkm import mkm
 
+
 class MkmTest(unittest.TestCase):
 
     def test_simple_call(self):

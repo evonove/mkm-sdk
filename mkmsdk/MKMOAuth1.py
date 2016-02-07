@@ -3,7 +3,6 @@ from requests.utils import to_native_string
 from six.moves.urllib.parse import unquote
 
 
-
 class MKMOAuth1(OAuth1):
     """
 

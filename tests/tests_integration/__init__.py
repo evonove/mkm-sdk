@@ -14,6 +14,7 @@ def skip_integration():
     except mkmsdk.exceptions.MissingConfig:
         return True
 
+
 def skip_account_integration():
     try:
         os.environ['MKM_ACCOUNT_LAST_NAME']
@@ -22,6 +23,7 @@ def skip_account_integration():
     except KeyError:
         return True
 
+
 def skip_dedicated_app_integration():
     try:
         os.environ['MKM_ACCESS_TOKEN'] == ''
@@ -29,6 +31,7 @@ def skip_dedicated_app_integration():
         return False
     except KeyError:
         return True
+
 
 @unittest.skipIf(skip_integration(), 'Missing env vars, skipping integration test')
 class IntegrationTest(unittest.TestCase):
