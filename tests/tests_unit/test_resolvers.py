@@ -40,3 +40,11 @@ class ResolversTest(unittest.TestCase):
 
         self.assertRaises(exceptions.MissingParam, self.live_resolver.setup,
                           simple_api_map_with_parameters, bad_param='Worst parameter ever')
+
+    def test_setup_escapes_additional_parameters(self):
+        simple_api_map = {'url': '/products/{name}/{game}/{language}/{match}', 'method': 'get'}
+        expected_url = '/products/Jace%2C%20the%20Mind%20Sculptor/1/1/False'
+
+        self.live_resolver.setup(simple_api_map, name='Jace, the Mind Sculptor', game=1, language=1, match=False)
+
+        self.assertEqual(self.live_resolver.url, expected_url)

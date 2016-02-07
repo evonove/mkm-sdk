@@ -26,3 +26,7 @@ class MkmTest(IntegrationTest):
     def test_sandbox_url(self):
         response = mkm_sandbox.market_place.games()
         self.assertEqual(response.request.url, 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/games')
+
+    def test_card_search(self):
+        response = mkm_sandbox.market_place.products(name='Jace, the Mind Sculptor', game=1, language=1, match=False)
+        self.assertEqual(response.status_code, 200)

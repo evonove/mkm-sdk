@@ -1,3 +1,6 @@
+import six
+from six.moves import urllib_parse
+
 from .api import Api
 from . import exceptions
 
@@ -28,9 +31,12 @@ class SimpleResolver:
 
         url, method = api_map['url'], api_map['method']
 
+        # We percent escape any string parameter while creating the url_entry so that if a card has spaces,
+        # commas or any other special character the url will be correctly formed anyway
         url_entry = {}
         for key in kwargs:
-            url_entry[str(key)] = kwargs.get(key)
+            url_entry[str(key)] = urllib_parse.quote(kwargs.get(key)) \
+                if isinstance(kwargs.get(key), six.string_types) else kwargs.get(key)
 
         try:
             url = url.format(**url_entry)
