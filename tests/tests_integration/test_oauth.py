@@ -71,17 +71,19 @@ class OAuthTest(IntegrationTest):
                          realm=url)
 
         last_name = os.environ['MKM_ACCOUNT_LAST_NAME']
-        first_name =  os.environ['MKM_ACCOUNT_FIRST_NAME']
+        first_name = os.environ['MKM_ACCOUNT_FIRST_NAME']
 
-        expected_account_response = {'account':
-                                         {
-                                             'name':
-                                                 {
-                                                     'lastName': last_name,
-                                                     'firstName': first_name
-                                                 }
-                                         }
-                                    }
+        expected_account_response = \
+            {
+                'account':
+                    {
+                        'name':
+                            {
+                                'lastName': last_name,
+                                'firstName': first_name
+                            }
+                    }
+            }
 
         r = requests.get(url, auth=auth)
 

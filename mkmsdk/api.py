@@ -67,10 +67,10 @@ class Api:
             `auth`: Returns an instance of `MKMOAuth1` with `url` as realm
         """
 
-        app_token = app_token if app_token != None else get_mkm_app_token()
-        app_secret = app_secret if app_secret != None else get_mkm_app_secret()
-        access_token = access_token if access_token != None else get_mkm_access_token()
-        access_token_secret = access_token_secret if access_token_secret != None else get_mkm_access_token_secret()
+        app_token = app_token if app_token is not None else get_mkm_app_token()
+        app_secret = app_secret if app_secret is not None else get_mkm_app_secret()
+        access_token = access_token if access_token is not None else get_mkm_access_token()
+        access_token_secret = access_token_secret if access_token_secret is not None else get_mkm_access_token_secret()
 
         # If access_token and access_token_secret are empty strings a personalized OAuth1 Client is used.
         # This is done because that would mean the user is using a Widget Application and having empty strings

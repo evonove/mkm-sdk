@@ -55,7 +55,7 @@ class ApiTest(unittest.TestCase):
     def test_sandbox_mode(self):
         sandbox_api = Api(sandbox_mode=True)
         expected_sandbox_base_endpoint = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json'
-        
+
         self.assertEqual(sandbox_api.base_endpoint, expected_sandbox_base_endpoint)
 
     def test_redirection(self):

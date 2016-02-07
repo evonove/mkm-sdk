@@ -14,6 +14,7 @@ class ConnectionError(Exception):
             message = '{}{}'.format(message, ' Error message: %s' % str(self.content))
         return message
 
+
 class Redirection(ConnectionError):
     """
     3xx
@@ -24,11 +25,14 @@ class Redirection(ConnectionError):
             message = "{} => {}" .format(message, self.response.get('Location'))
         return message
 
+
 class MissingParam(TypeError):
     pass
 
+
 class MissingConfig(Exception):
     pass
+
 
 class ClientError(ConnectionError):
     """
@@ -36,11 +40,13 @@ class ClientError(ConnectionError):
     """
     pass
 
+
 class BadRequest(ClientError):
     """
     400 Bad Request
     """
     pass
+
 
 class UnauthorizedAccess(ClientError):
     """
@@ -48,10 +54,12 @@ class UnauthorizedAccess(ClientError):
     """
     pass
 
+
 class ForbiddenAccess(ClientError):
     """
     403 Forbidden
     """
+
 
 class ResourceNotFound(ClientError):
     """
@@ -59,11 +67,13 @@ class ResourceNotFound(ClientError):
     """
     pass
 
+
 class ResourceConflict(ClientError):
     """
     409 Conflict
     """
     pass
+
 
 class ResourceGone(ClientError):
     """
@@ -71,17 +81,20 @@ class ResourceGone(ClientError):
     """
     pass
 
+
 class ResourceInvalid(ClientError):
     """
     422 Invalid
     """
     pass
 
+
 class ServerError(ConnectionError):
     """
     5xx Server Error
     """
     pass
+
 
 class MethodNotAllowed(ClientError):
     """
