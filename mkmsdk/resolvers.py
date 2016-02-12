@@ -1,4 +1,3 @@
-import six
 from six.moves import urllib_parse
 
 from .api import Api
@@ -29,20 +28,17 @@ class SimpleResolver:
         elif api_map.get('url') is None or api_map.get('method') is None:
             raise Exception('Resolve must be called with a map with `url` and `method`')
 
-        url, method = api_map['url'], api_map['method']
-
-        # We percent escape any string parameter while creating the url_entry so that if a card has spaces,
-        # commas or any other special character the url will be correctly formed anyway
-        url_entry = {}
-        for key in kwargs:
-            url_entry[str(key)] = urllib_parse.quote(kwargs.get(key)) \
-                if isinstance(kwargs.get(key), six.string_types) else kwargs.get(key)
+        url = api_map['url']
+        method = api_map['method']
 
         try:
-            url = url.format(**url_entry)
+            url = url.format(**kwargs)
         except KeyError as ke:
             raise exceptions.MissingParam('Missing url sdk parameter: %s' % str(ke))
-        self.url = url
+
+        # We percent encode the url so that if any string has spaces,
+        # commas or any other special character the url will be correctly formed anyway
+        self.url = urllib_parse.quote(url)
         self.method = method
 
     def resolve(self, api_map=None, **kwargs):
