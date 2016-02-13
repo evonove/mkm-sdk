@@ -2,6 +2,12 @@
 History
 =======
 
+0.3.0 (2016-02-13)
+++++++++++++++++++
+
+* Widget Apps now work correctly
+* Fixed an issue when searching for cards with spaces, commas or other special chars in their name
+
 0.2.0 (2015-07-30)
 ++++++++++++++++++
 
