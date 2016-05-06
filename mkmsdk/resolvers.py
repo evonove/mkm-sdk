@@ -41,7 +41,7 @@ class SimpleResolver:
         self.url = urllib_parse.quote(url)
         self.method = method
 
-    def resolve(self, api_map=None, **kwargs):
+    def resolve(self, api_map=None, data=None, **kwargs):
         """
 
         Params:
@@ -54,4 +54,4 @@ class SimpleResolver:
         """
         self.setup(api_map=api_map, **kwargs)
 
-        return self.api.request(url=self.url, method=self.method)
+        return self.api.request(url=self.url, method=self.method, data=data)
