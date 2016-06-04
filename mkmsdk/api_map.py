@@ -269,6 +269,12 @@ _API_MAP = {
                     'url': '/stock/decrease',
                     'method': 'put',
                     'description': 'Decrease quantities for articles in authenticated user`s stock'
+                },
+                
+                'get_shoppingcart_articles' : {
+                    'url': '/stock/shoppingcart-articles,
+                    'method': 'get',
+                    'description': 'Returns all articles that are currently in other user`s shopping carts.'
                 }
             },
 
