@@ -272,7 +272,7 @@ _API_MAP = {
                 },
                 
                 'get_shoppingcart_articles' : {
-                    'url': '/stock/shoppingcart-articles,
+                    'url': '/stock/shoppingcart-articles',
                     'method': 'get',
                     'description': 'Returns all articles that are currently in other user`s shopping carts.'
                 }
