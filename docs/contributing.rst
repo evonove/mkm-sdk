@@ -56,22 +56,19 @@ Ready to contribute? Here's how to set up `mkmsdk` for local development.
 
     $ git clone git@github.com:your_name_here/mkmsdk.git
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into a virtualenv. Assuming you have `virtualenvwrapper` installed, this is how you set up your fork for local development::
 
     $ mkvirtualenv mkmsdk
     $ cd mkmsdk/
-    $ python setup.py develop
+    $ pip install -r requirements/dev.txt
 
-4. Create a branch for local development::
+4. Create a branch for local development so that you make your changes locally::
 
     $ git checkout -b name-of-your-bugfix-or-feature
-
-Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass the tests, including testing
 other Python versions with tox::
 
-    $ python setup.py test
     $ tox
 
 To get tox, just pip install it into your virtualenv.
