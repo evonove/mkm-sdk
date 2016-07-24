@@ -15,6 +15,11 @@ Magic Kard Market Python SDK
 
 A simple SDK for dedicated and widget apps working with Magic Kard Market.
 
+Contributing
+============
+
+Feel free to contribute! Submit `a PR following the guidelines <https://mkm-sdk.readthedocs.io/en/latest/contributing.html#pull-request-guidelines/>`_ and it will be alright.
+
 Requirements
 ============
 
