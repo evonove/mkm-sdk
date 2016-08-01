@@ -46,6 +46,7 @@ class SimpleResolver:
 
         Params:
             `api_map`: Dict with urls and methods for the request
+            `data`: Data sent to MKM in PUT, POST and DELETE requests
             `kwargs`: Optional additional parameters to be attached to the url
 
         Return:

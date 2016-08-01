@@ -46,3 +46,5 @@ If you want get the content of the response you call the `json` method on the `r
 Similarly to obtain informations about a specific user you can make a request like this::
 
     response = mkm.market_place.user(user='SampleUser')
+
+Note that if you need to send data to MKM backend it has to be XML or it will return a 400 Bad Request.
