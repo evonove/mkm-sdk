@@ -1,4 +1,12 @@
 -r base.in
 
-coverage
+# Docs
 sphinx
+
+# Testing
+pytest
+pytest-cov
+pytest-mock
+
+# Code Style
+flake8
