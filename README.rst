@@ -23,7 +23,7 @@ Feel free to contribute! Submit `a PR following the guidelines <https://mkm-sdk.
 Requirements
 ============
 
-* Python 2.7/3.4
+* Python 2.7, 3.3, 3.4, 3.5
 * `Requests <http://docs.python-requests.org/>`_
 * `Requests_OAuthlib <https://github.com/requests/requests-oauthlib/>`_
 * `six <https://pypi.python.org/pypi/six/>`_
@@ -75,10 +75,5 @@ Integration tests will be skipped if the four environment variables are not set.
 * ``MKM_APP_SECRET``
 * ``MKM_ACCESS_TOKEN``
 * ``MKM_ACCESS_TOKEN_SECRET``
-
-There are also other two variable to be set if you don't want to skip your dedicated app's account integration tests.
-
-* ``MKM_ACCOUNT_LAST_NAME``
-* ``MKM_ACCOUNT_FIRST_NAME``
 
 Note that some tests will be skipped depending if `MKM_ACCESS_TOKEN` and `MKM_ACCESS_TOKEN_SECRET` are empty strings or not.

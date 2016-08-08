@@ -1,50 +1,55 @@
-import unittest
+import pytest
 
 from mkmsdk import exceptions
 from mkmsdk.resolvers import SimpleResolver
 
 
-class ResolversTest(unittest.TestCase):
-    def setUp(self):
-        self.live_resolver = SimpleResolver(sandbox_mode=False)
+def test_if_bad_api_map_is_handled_correctly():
+    live_resolver = SimpleResolver(sandbox_mode=False)
+    empty_api_map = {}
 
-    def test_if_bad_api_map_is_handled_correctly(self):
-        empty_api_map = {}
+    with pytest.raises(Exception):
+        live_resolver.setup()
 
-        self.assertRaises(Exception, self.live_resolver.setup)
+    with pytest.raises(Exception):
+        live_resolver.setup(empty_api_map)
 
-        self.assertRaises(Exception, self.live_resolver.setup, empty_api_map)
 
-    def test_if_setup_works_correctly(self):
-        simple_api_map = {'url': '/account', 'method': 'get'}
-        expected_url = '/account'
-        expected_url_with_parameters = '/user/SimpleUser'
-        expected_method = 'get'
-        simple_api_map_with_parameters = {'url': '/user/{user}', 'method': 'get'}
+def test_if_setup_works_correctly():
+    live_resolver = SimpleResolver(sandbox_mode=False)
+    simple_api_map = {'url': '/account', 'method': 'get'}
+    expected_url = '/account'
+    expected_url_with_parameters = '/user/SimpleUser'
+    expected_method = 'get'
+    simple_api_map_with_parameters = {'url': '/user/{user}', 'method': 'get'}
 
-        self.live_resolver.setup(simple_api_map)
+    live_resolver.setup(simple_api_map)
 
-        self.assertEqual(self.live_resolver.url, expected_url)
-        self.assertEqual(self.live_resolver.method, expected_method)
+    assert live_resolver.url == expected_url
+    assert live_resolver.method == expected_method
 
-        self.live_resolver.setup(simple_api_map_with_parameters, user='SimpleUser')
+    live_resolver.setup(simple_api_map_with_parameters, user='SimpleUser')
 
-        self.assertEqual(self.live_resolver.url, expected_url_with_parameters)
-        self.assertEqual(self.live_resolver.method, expected_method)
+    assert live_resolver.url == expected_url_with_parameters
+    assert live_resolver.method == expected_method
 
-    def test_if_bad_parameters_are_handled_correctly(self):
-        simple_api_map_with_parameters = {'url': '/user/{user}', 'method': 'get'}
 
-        self.assertRaises(exceptions.MissingParam, self.live_resolver.setup,
-                          simple_api_map_with_parameters)
+def test_if_bad_parameters_are_handled_correctly():
+    live_resolver = SimpleResolver(sandbox_mode=False)
+    simple_api_map_with_parameters = {'url': '/user/{user}', 'method': 'get'}
 
-        self.assertRaises(exceptions.MissingParam, self.live_resolver.setup,
-                          simple_api_map_with_parameters, bad_param='Worst parameter ever')
+    with pytest.raises(exceptions.MissingParam):
+        live_resolver.setup(simple_api_map_with_parameters)
 
-    def test_setup_escapes_additional_parameters(self):
-        simple_api_map = {'url': '/products/{name}/{game}/{language}/{match}', 'method': 'get'}
-        expected_url = '/products/Jace%2C%20the%20Mind%20Sculptor/1/1/False'
+    with pytest.raises(exceptions.MissingParam):
+        live_resolver.setup(simple_api_map_with_parameters, bad_param='Worse parameter ever')
 
-        self.live_resolver.setup(simple_api_map, name='Jace, the Mind Sculptor', game=1, language=1, match=False)
 
-        self.assertEqual(self.live_resolver.url, expected_url)
+def test_setup_escapes_additional_parameters():
+    live_resolver = SimpleResolver(sandbox_mode=False)
+    simple_api_map = {'url': '/products/{name}/{game}/{language}/{match}', 'method': 'get'}
+    expected_url = '/products/Jace%2C%20the%20Mind%20Sculptor/1/1/False'
+
+    live_resolver.setup(simple_api_map, name='Jace, the Mind Sculptor', game=1, language=1, match=False)
+
+    assert live_resolver.url == expected_url
