@@ -5,7 +5,7 @@ from oauthlib.oauth1 import Client
 from mkmsdk.MKMClient import MKMClient
 from mkmsdk.api import Api
 from mkmsdk import exceptions
-from mkmsdk import get_mkm_app_secret
+from mkmsdk.utils import get_mkm_app_secret
 
 
 def test_create_auth():
@@ -39,7 +39,7 @@ def test_create_auth_with_empty_string_token():
 
 
 def test_missing_env_var_raise_exception_correctly(mocker):
-    os_mocked = mocker.patch('mkmsdk.os')
+    os_mocked = mocker.patch('mkmsdk.utils.os')
     os_mocked.environ = {}
     with pytest.raises(exceptions.MissingConfig):
         get_mkm_app_secret()

@@ -3,7 +3,7 @@ from oauthlib.oauth1.rfc5849 import Client
 
 from .MKMClient import MKMClient
 from . import exceptions
-from . import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
+from .utils import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
 from .MKMOAuth1 import MKMOAuth1
 from .api_map import _API_MAP
 
