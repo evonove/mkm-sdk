@@ -1,8 +1,4 @@
-============
-Installation
-============
-
-From the command line::
+From the command line:
 
     pip install mkmsdk
 

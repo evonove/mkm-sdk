@@ -1,22 +1,19 @@
-=====
-Usage
-=====
+# Getting started
 
-To use the SDK the first thing to do is import `mkm` to work on live servers or `mkm_sandbox` to work on the sandbox::
+To use the SDK the first thing to do is import `mkm` to work on live servers or `mkm_sandbox` to work on the sandbox:
 
     from mkmsdk.mkm import mkm
 
     from mkmsdk.mkm import mkm_sandbox
 
 
-For example to obtain informations about the authenticated account you can make a request like this::
+For example to obtain informations about the authenticated account you can make a request like this:
 
     response = mkm.account_management.account()
 
-This will return a `Response <http://docs.python-requests.org/en/latest/api/?highlight=response#requests.Response/>`_
-object that contains the response from the server.
+This will return a [Response][1] object that contains the response from the server.
 
-If you want get the content of the response you call the `json` method on the `response` object::
+If you want get the content of the response you call the `json` method on the `response` object:
 
     response.json()
 
@@ -43,8 +40,10 @@ If you want get the content of the response you call the `json` method on the `r
       'idDisplayLanguage': 5,
       'accountBalance': 0}}
 
-Similarly to obtain informations about a specific user you can make a request like this::
+Similarly to obtain informations about a specific user you can make a request like this:
 
     response = mkm.market_place.user(user='SampleUser')
 
 Note that if you need to send data to MKM backend it has to be XML or it will return a 400 Bad Request.
+
+[1]: http://docs.python-requests.org/en/latest/api/?highlight=response#requests.Response

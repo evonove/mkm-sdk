@@ -3,7 +3,7 @@
 import sys
 import os
 
-version = '0.3.0'  # When changing this, please take a moment for doing the same in docs/conf.py
+version = '0.3.0'
 
 try:
     from setuptools import setup
@@ -17,9 +17,6 @@ if sys.argv[-1] == 'publish':
     print(" git tag -a %s -m 'version %s'" % (version, version))
     print(" git push --tags")
     sys.exit()
-
-readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 
 setup(
