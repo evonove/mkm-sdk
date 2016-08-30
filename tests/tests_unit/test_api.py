@@ -9,6 +9,10 @@ from mkmsdk.utils import get_mkm_app_secret
 
 
 def test_create_auth():
+    """
+    Verifies that the default Client is used
+    when all the tokens are not empty strings.
+    """
     api = Api()
     auth = api.create_auth('https://www.mkmapi.eu/ws/v1.1/output.json',
                            app_token='app_token',
@@ -24,6 +28,11 @@ def test_create_auth():
 
 
 def test_create_auth_with_empty_string_token():
+    """
+    Verifies that the custom MKMClient is used
+    when access token and access token secret
+    are empty strings.
+    """
     api = Api()
     auth = api.create_auth('https://www.mkmapi.eu/ws/v1.1/output.json',
                            app_token='app_token',
@@ -39,6 +48,7 @@ def test_create_auth_with_empty_string_token():
 
 
 def test_missing_env_var_raise_exception_correctly(mocker):
+    """Verifies that an expection is thrown when necessary env vars are missing."""
     os_mocked = mocker.patch('mkmsdk.utils.os')
     os_mocked.environ = {}
     with pytest.raises(exceptions.MissingConfig):
@@ -46,6 +56,7 @@ def test_missing_env_var_raise_exception_correctly(mocker):
 
 
 def test_endpoint():
+    """Verifies the live endpoint is used by default."""
     api = Api()
     expected_live_base_endpoint = 'https://www.mkmapi.eu/ws/v1.1/output.json'
 
@@ -53,6 +64,7 @@ def test_endpoint():
 
 
 def test_sandbox_mode():
+    """Verifies the sandbox endpoint is used when specified."""
     sandbox_api = Api(sandbox_mode=True)
     expected_sandbox_base_endpoint = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json'
 

@@ -4,6 +4,7 @@ from mkmsdk.resolvers import SimpleResolver
 
 @missing_app_tokens
 def test_resolve_with_data():
+    """Verifies posting data to backend returns a positive response."""
     resolver = SimpleResolver(sandbox_mode=True)
 
     simple_api_map = {'url': '/stock',

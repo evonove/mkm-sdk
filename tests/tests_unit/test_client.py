@@ -4,9 +4,8 @@ from mkmsdk.MKMClient import MKMClient
 
 
 def test_get_oauth_params():
-    """
-    Tests if oauth_token is added to the list of params when an empty string
-    """
+    """Verifies oauth_token is added to the list of params when an empty string."""
+
     client = MKMClient(client_key='app_token',
                        client_secret='app_secret',
                        resource_owner_key='',

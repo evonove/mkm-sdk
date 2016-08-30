@@ -10,9 +10,7 @@ from mkmsdk.MKMClient import MKMClient
 
 @missing_app_tokens
 def test_oauth_is_received():
-    """
-    Checks if OAuth1 is received
-    """
+    """Verifies if OAuth1 is received."""
     url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/games'
     auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
                      client_secret=os.environ.get('MKM_APP_SECRET'),
@@ -25,9 +23,7 @@ def test_oauth_is_received():
 
 @missing_app_tokens
 def test_widget_app_oauth1_is_correct():
-    """
-    Checks if response from server is positive
-    """
+    """Verifies if response from backend is positive using custom Client."""
     url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/games'
     auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
                      client_secret=os.environ.get('MKM_APP_SECRET'),
@@ -44,9 +40,7 @@ def test_widget_app_oauth1_is_correct():
 @missing_app_tokens
 @missing_widget_tokens
 def test_dedicated_app_oauth1_is_correct():
-    """
-    Checks if response from server is positive
-    """
+    """Verifies if response from backend is positive using custom OAuth header."""
     url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/games'
     auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
                      client_secret=os.environ.get('MKM_APP_SECRET'),
@@ -62,9 +56,7 @@ def test_dedicated_app_oauth1_is_correct():
 @missing_app_tokens
 @missing_widget_tokens
 def test_account_entity_is_as_expected():
-    """
-    Checks if the account entity received is as expected
-    """
+    """Verifies the account entity received is as expected."""
     url = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json/account'
     auth = MKMOAuth1(os.environ.get('MKM_APP_TOKEN'),
                      client_secret=os.environ.get('MKM_APP_SECRET'),

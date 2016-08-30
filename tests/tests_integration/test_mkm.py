@@ -5,6 +5,7 @@ from mkmsdk.mkm import mkm_sandbox
 
 @missing_app_tokens
 def test_response_is_as_expected():
+    """Verifies the list of games returned from backend is as expected."""
     response = mkm_sandbox.market_place.games()
     json_response = response.json()
 
@@ -26,6 +27,7 @@ def test_response_is_as_expected():
 
 @missing_app_tokens
 def test_sandbox_url():
+    """Verifies that mkm_sandbox sends its requests to sandbox backend."""
     response = mkm_sandbox.market_place.games()
 
     assert response.status_code == 200
@@ -34,6 +36,7 @@ def test_sandbox_url():
 
 @missing_app_tokens
 def test_card_search():
+    """Verifies the search for a product with special chars in its names works correctly."""
     response = mkm_sandbox.market_place.products(name='Jace, the Mind Sculptor', game=1, language=1, match=False)
 
     assert response.status_code == 200
