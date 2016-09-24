@@ -33,8 +33,8 @@ class SimpleResolver:
 
         try:
             url = url.format(**kwargs)
-        except KeyError as ke:
-            raise exceptions.MissingParam('Missing url sdk parameter: %s' % str(ke))
+        except KeyError as param:
+            raise exceptions.MissingParam(param=param)
 
         # We percent encode the url so that if any string has spaces,
         # commas or any other special character the url will be correctly formed anyway
@@ -43,7 +43,6 @@ class SimpleResolver:
 
     def resolve(self, api_map=None, data=None, **kwargs):
         """
-
         Params:
             `api_map`: Dict with urls and methods for the request
             `data`: Data sent to MKM in PUT, POST and DELETE requests
@@ -51,7 +50,6 @@ class SimpleResolver:
 
         Return:
             `response`: Returns the response received from the server
-
         """
         self.setup(api_map=api_map, **kwargs)
 

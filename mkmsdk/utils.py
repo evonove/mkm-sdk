@@ -6,7 +6,7 @@ def _get_env_var(key):
     try:
         return os.environ[key]
     except KeyError:
-        raise exceptions.MissingConfig('Missing MKM env var: ' + key)
+        raise exceptions.MissingEnvVar(key)
 
 
 def get_mkm_app_token():

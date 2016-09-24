@@ -39,11 +39,8 @@ class Api:
 
         auth = self.create_auth(complete_url)
 
-        try:
-            response = request(method=method, url=complete_url, auth=auth, **kwargs)
-            return self.handle_response(response, response.content)
-        except exceptions.BadRequest as error:
-            return {'error': error.content}
+        response = request(method=method, url=complete_url, auth=auth, **kwargs)
+        return self.handle_response(response)
 
     def create_auth(self, url,
                     app_token=None,
@@ -87,41 +84,18 @@ class Api:
                          client_class=client,
                          realm=url)
 
-    def handle_response(self, response, content):
+    def handle_response(self, response):
         """
         Check the HTTP response
 
         Params:
             `response`: Response received from the server
-            `content`: Content of the response received
         Return:
             `response`: Returns the response received if positive or raise exception if negative
         """
 
         status = response.status_code
-        if status in (301, 302, 303, 307):
-            raise exceptions.Redirection(response, content)
-        elif 200 <= status <= 299:
+        if 200 <= status <= 299:
             return response
-        elif status == 400:
-            raise exceptions.BadRequest(response, content)
-        elif status == 401:
-            raise exceptions.UnauthorizedAccess(response, content)
-        elif status == 403:
-            raise exceptions.ForbiddenAccess(response, content)
-        elif status == 404:
-            raise exceptions.ResourceNotFound(response, content)
-        elif status == 405:
-            raise exceptions.MethodNotAllowed(response, content)
-        elif status == 409:
-            raise exceptions.ResourceConflict(response, content)
-        elif status == 410:
-            raise exceptions.ResourceGone(response, content)
-        elif status == 422:
-            raise exceptions.ResourceInvalid(response, content)
-        elif 401 <= status <= 499:
-            raise exceptions.ClientError(response, content)
-        elif 500 <= status <= 599:
-            raise exceptions.ServerError(response, content)
         else:
-            raise exceptions.ConnectionError(response, content, "Unknown response code: #{response.code}")
+            raise exceptions.ConnectionError(response)
