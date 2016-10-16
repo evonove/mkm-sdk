@@ -2,6 +2,7 @@ from six.moves import urllib_parse
 
 from .api import Api
 from . import exceptions
+from .serializer import XMLSerializer
 
 
 class SimpleResolver:
@@ -52,5 +53,9 @@ class SimpleResolver:
             `response`: Returns the response received from the server
         """
         self.setup(api_map=api_map, **kwargs)
+
+        if isinstance(data, dict):
+            serializer = XMLSerializer()
+            data = serializer.serialize(data=data)
 
         return self.api.request(url=self.url, method=self.method, data=data)
