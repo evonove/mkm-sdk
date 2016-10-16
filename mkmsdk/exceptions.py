@@ -71,3 +71,9 @@ class MissingEnvVar(Exception):
 
     def __str__(self):
         return 'Missing %s environment variable' % self.env
+
+
+class SerializationException(Exception):
+    """Wraps exceptions raised during XML serialization"""
+    def __str__(self):
+        return 'Serialization exception. %s' % self.args

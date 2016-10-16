@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from mkmsdk.exceptions import ConnectionError, MissingParam, MissingEnvVar
+from mkmsdk.exceptions import ConnectionError, MissingParam, MissingEnvVar, SerializationException
 
 
 def test_connection_error_with_no_args():
@@ -57,3 +57,10 @@ def test_missing_config():
     error = MissingEnvVar('client_id')
 
     assert str(error) == 'Missing client_id environment variable'
+
+
+def test_serialization_exception():
+    """Test error string is formatted correctly"""
+    error = SerializationException('Something wrong with serialization')
+
+    assert str(error) == 'Serialization exception. Something wrong with serialization'
