@@ -10,3 +10,7 @@ pytest-mock
 
 # Code Style
 flake8
+
+# Packaging
+wheel
+twine

@@ -1,3 +1,9 @@
+## 0.4.0 (2016-10-16)
+
+* Fixed bug when sending data to backend
+* Implemented XMLSerializer to generate a valid XML when sending data to backend
+* Added support for Python 3.3 and 3.5
+
 ## 0.3.0 (2016-02-13)
 
 * Widget Apps now work correctly
