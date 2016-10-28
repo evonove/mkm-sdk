@@ -27,6 +27,6 @@ class MKMClient(Client):
         # the response will always be 401 Unauthorized
         # Documentation: https://www.mkmapi.eu/ws/documentation/API:Auth_OAuthHeader
         if not oauthParamExist:
-            parameters.append(('oauth_token', ''))
+            parameters.append((u'oauth_token', u''))
 
         return parameters
