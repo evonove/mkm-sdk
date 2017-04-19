@@ -54,4 +54,4 @@ class SimpleResolver:
         """
         self.setup(api_map=api_map, **kwargs)
 
-        return self.api.request(url=self.url, method=self.method, data=data, auth=auth)
+        return self.api.request(url=self.url, method=self.method, data=data, auth_params=auth)
