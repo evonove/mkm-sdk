@@ -37,6 +37,8 @@ class Api:
 
         complete_url = '{}{}'.format(self.base_endpoint, url)
 
+        if auth_params is None:
+            auth_params = {}
         auth = self.create_auth(complete_url, **auth_params)
 
         try:
