@@ -22,7 +22,7 @@ class Api:
         else:
             self.base_endpoint = _API_MAP['current']['api_root']
 
-    def request(self, url, method, **kwargs):
+    def request(self, url, method, auth_params=None, **kwargs):
         """
         Sends requests to the server with parameters passed
 
@@ -37,7 +37,7 @@ class Api:
 
         complete_url = '{}{}'.format(self.base_endpoint, url)
 
-        auth = self.create_auth(complete_url)
+        auth = self.create_auth(complete_url, **auth_params)
 
         try:
             response = request(method=method, url=complete_url, auth=auth, **kwargs)
