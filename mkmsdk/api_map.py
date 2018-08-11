@@ -1,7 +1,7 @@
 _API_MAP = {
     'current': {
-        'api_root': 'https://www.mkmapi.eu/ws/v1.1/output.json',
-        'api_sandbox_root': 'https://sandbox.mkmapi.eu/ws/v1.1/output.json',
+        'api_root': 'https://api.cardmarket.com/ws/v1.1/output.json',
+        'api_sandbox_root': 'https://sandbox.api.cardmarket.com/ws/v1.1/output.json',
         'api': {
 
             'account_management': {
