@@ -11,11 +11,11 @@ def test_get_oauth_params():
                        client_secret='app_secret',
                        resource_owner_key='',
                        resource_owner_secret='',
-                       realm='https://sandbox.mkmapi.eu',
+                       realm='https://sandbox.cardmarket.com',
                        nonce='0987654321',
                        timestamp='1234567890')
 
-    params = client.get_oauth_params(Request(uri='https://sandbox.mkmapi.eu'))
+    params = client.get_oauth_params(Request(uri='https://sandbox.cardmarket.com'))
 
     assert params[0][0] == 'oauth_nonce'
     assert params[0][1] == '0987654321'
@@ -40,11 +40,11 @@ def test_params_are_unicode():
                        client_secret='app_secret',
                        resource_owner_key='',
                        resource_owner_secret='',
-                       realm='https://sandbox.mkmapi.eu',
+                       realm='https://sandbox.cardmarket.com',
                        nonce='0987654321',
                        timestamp='1234567890')
 
-    params = client.get_oauth_params(Request(uri='https://sandbox.mkmapi.eu'))
+    params = client.get_oauth_params(Request(uri='https://sandbox.cardmarket.com'))
 
     assert isinstance(params[0][0], six.text_type)
     assert isinstance(params[0][1], six.text_type)

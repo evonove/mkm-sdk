@@ -14,7 +14,7 @@ def test_create_auth():
     when all the tokens are not empty strings.
     """
     api = Api()
-    auth = api.create_auth('https://www.mkmapi.eu/ws/v1.1/output.json',
+    auth = api.create_auth('https://api.cardmarket.com/ws/v1.1/output.json',
                            app_token='app_token',
                            app_secret='app_secret',
                            access_token='access_token',
@@ -34,7 +34,7 @@ def test_create_auth_with_empty_string_token():
     are empty strings.
     """
     api = Api()
-    auth = api.create_auth('https://www.mkmapi.eu/ws/v1.1/output.json',
+    auth = api.create_auth('https://api.cardmarket.com/ws/v1.1/output.json',
                            app_token='app_token',
                            app_secret='app_secret',
                            access_token='',
@@ -58,7 +58,7 @@ def test_missing_env_var_raise_exception_correctly(mocker):
 def test_endpoint():
     """Verifies the live endpoint is used by default."""
     api = Api()
-    expected_live_base_endpoint = 'https://www.mkmapi.eu/ws/v1.1/output.json'
+    expected_live_base_endpoint = 'https://api.cardmarket.com/ws/v1.1/output.json'
 
     assert api.base_endpoint == expected_live_base_endpoint
 
@@ -66,7 +66,7 @@ def test_endpoint():
 def test_sandbox_mode():
     """Verifies the sandbox endpoint is used when specified."""
     sandbox_api = Api(sandbox_mode=True)
-    expected_sandbox_base_endpoint = 'https://sandbox.mkmapi.eu/ws/v1.1/output.json'
+    expected_sandbox_base_endpoint = 'https://sandbox.cardmarket.com/ws/v1.1/output.json'
 
     assert sandbox_api.base_endpoint == expected_sandbox_base_endpoint
 
