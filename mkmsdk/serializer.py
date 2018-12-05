@@ -1,5 +1,5 @@
 from xml.sax.saxutils import XMLGenerator
-from six import StringIO
+from io import StringIO
 
 from .exceptions import SerializationException
 

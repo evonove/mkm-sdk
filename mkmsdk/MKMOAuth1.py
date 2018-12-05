@@ -1,6 +1,6 @@
 from requests_oauthlib import OAuth1
 from requests.utils import to_native_string
-from six.moves.urllib.parse import unquote
+from urllib.parse import unquote
 
 
 class MKMOAuth1(OAuth1):

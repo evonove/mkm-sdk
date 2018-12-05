@@ -40,7 +40,7 @@ setup(
     license='MIT',
     description='MagicKardMarket sdk',
     long_description=LONG_DESCRIPTION,
-    install_requires=['requests', 'requests_oauthlib', 'six'],
+    install_requires=['requests', 'requests_oauthlib'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

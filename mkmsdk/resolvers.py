@@ -1,4 +1,4 @@
-from six.moves import urllib_parse
+from urllib.parse import quote
 
 from .api import Api
 from . import exceptions
@@ -39,7 +39,7 @@ class SimpleResolver:
 
         # We percent encode the url so that if any string has spaces,
         # commas or any other special character the url will be correctly formed anyway
-        self.url = urllib_parse.quote(url)
+        self.url = quote(url)
         self.method = method
 
     def resolve(self, api_map=None, data=None, **kwargs):

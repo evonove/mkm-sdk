@@ -36,7 +36,7 @@ readme-renderer==24.0     # via twine
 requests-oauthlib==1.0.0
 requests-toolbelt==0.8.0  # via twine
 requests==2.20.1
-six==1.11.0
+six==1.11.0               # via bleach, livereload, more-itertools, pytest, readme-renderer
 tornado==5.1.1            # via livereload, mkdocs
 tqdm==4.28.1              # via twine
 twine==1.12.1
