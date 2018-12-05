@@ -47,5 +47,6 @@ class Mkm:
         resolver = resolvers.SimpleResolver(self.sandbox_mode)
         return resolver.resolve(api_map=self.api_map, **kwargs)
 
+
 mkm = Mkm(api_map=default_api_map)
 mkm_sandbox = Mkm(api_map=default_api_map, sandbox_mode=True)
