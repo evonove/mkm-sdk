@@ -11,8 +11,8 @@ class SimpleResolver:
     """
 
     def __init__(self, sandbox_mode):
-        self.url = ''
-        self.method = ''
+        self.url = ""
+        self.method = ""
         self.api = Api(sandbox_mode=sandbox_mode)
 
     def setup(self, api_map=None, **kwargs):
@@ -25,12 +25,12 @@ class SimpleResolver:
         """
 
         if api_map is None:
-            raise Exception('Resolve must be called with `api_map` argument')
-        elif api_map.get('url') is None or api_map.get('method') is None:
-            raise Exception('Resolve must be called with a map with `url` and `method`')
+            raise Exception("Resolve must be called with `api_map` argument")
+        elif api_map.get("url") is None or api_map.get("method") is None:
+            raise Exception("Resolve must be called with a map with `url` and `method`")
 
-        url = api_map['url']
-        method = api_map['method']
+        url = api_map["url"]
+        method = api_map["method"]
 
         try:
             url = url.format(**kwargs)

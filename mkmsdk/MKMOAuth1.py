@@ -15,7 +15,7 @@ class MKMOAuth1(OAuth1):
 
         correct_signature = self.decode_signature(r.headers)
 
-        r.headers.__setitem__('Authorization', correct_signature)
+        r.headers.__setitem__("Authorization", correct_signature)
         r.url = to_native_string(r.url)
         return r
 
@@ -33,7 +33,7 @@ class MKMOAuth1(OAuth1):
             `authorization_string`: Returns a string of the decoded signature
         """
 
-        authorization_byte = given_header['Authorization']
+        authorization_byte = given_header["Authorization"]
         authorization_string = authorization_byte.decode()
         signature_position = authorization_string.find('oauth_signature="') + len('oauth_signature="')
         sub_string_signature = authorization_string[signature_position:]

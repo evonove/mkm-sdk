@@ -9,7 +9,6 @@ from .api_map import _API_MAP
 
 
 class Api:
-
     def __init__(self, sandbox_mode=False):
         """
         Initializes the endpoint used for requests
@@ -18,9 +17,9 @@ class Api:
             `sandbox_mode`: Specifies if sending request to sandbox or live server
         """
         if sandbox_mode:
-            self.base_endpoint = _API_MAP['current']['api_sandbox_root']
+            self.base_endpoint = _API_MAP["current"]["api_sandbox_root"]
         else:
-            self.base_endpoint = _API_MAP['current']['api_root']
+            self.base_endpoint = _API_MAP["current"]["api_root"]
 
     def request(self, url, method, **kwargs):
         """
@@ -35,18 +34,14 @@ class Api:
             `response`: Returns the response received from the server
         """
 
-        complete_url = '{}{}'.format(self.base_endpoint, url)
+        complete_url = "{}{}".format(self.base_endpoint, url)
 
         auth = self.create_auth(complete_url)
 
         response = request(method=method, url=complete_url, auth=auth, **kwargs)
         return self.handle_response(response)
 
-    def create_auth(self, url,
-                    app_token=None,
-                    app_secret=None,
-                    access_token=None,
-                    access_token_secret=None):
+    def create_auth(self, url, app_token=None, app_secret=None, access_token=None, access_token_secret=None):
         """
         Create authorization with MKMOAuth1, if Access Token and Access Token Secret
         are not found a custom Client is used.
@@ -77,12 +72,14 @@ class Api:
         else:
             client = Client
 
-        return MKMOAuth1(app_token,
-                         client_secret=app_secret,
-                         resource_owner_key=access_token,
-                         resource_owner_secret=access_token_secret,
-                         client_class=client,
-                         realm=url)
+        return MKMOAuth1(
+            app_token,
+            client_secret=app_secret,
+            resource_owner_key=access_token,
+            resource_owner_secret=access_token_secret,
+            client_class=client,
+            realm=url,
+        )
 
     def handle_response(self, response):
         """

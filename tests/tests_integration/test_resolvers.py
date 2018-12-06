@@ -7,8 +7,7 @@ def test_resolve_with_xml_data():
     """Verifies posting xml data to backend returns a positive response."""
     resolver = SimpleResolver(sandbox_mode=True)
 
-    simple_api_map = {'url': '/stock',
-                      'method': 'post'}
+    simple_api_map = {"url": "/stock", "method": "post"}
 
     # Data posted to MKM, we post an XML because the API
     # doesn't accept anything else
@@ -41,25 +40,25 @@ def test_resolve_with_data():
     """
     resolver = SimpleResolver(sandbox_mode=True)
 
-    simple_api_map = {'url': '/stock',
-                      'method': 'post'}
+    simple_api_map = {"url": "/stock", "method": "post"}
 
     # Data posted to MKM, this will be serialized to XML
     # before being sent, otherwise the backend won't accept it
-    data = {'article': [
-                {
-                 'idProduct': 100569,
-                 'idLanguage': 1,
-                 'comments': 'Inserted through the API',
-                 'count': 1,
-                 'price': 4,
-                 'condition': 'EX',
-                 'isFoil': True,
-                 'isSigned': False,
-                 'isPlayset': False
-                }
-              ]
+    data = {
+        "article": [
+            {
+                "idProduct": 100569,
+                "idLanguage": 1,
+                "comments": "Inserted through the API",
+                "count": 1,
+                "price": 4,
+                "condition": "EX",
+                "isFoil": True,
+                "isSigned": False,
+                "isPlayset": False,
             }
+        ]
+    }
 
     response = resolver.resolve(api_map=simple_api_map, data=data)
 

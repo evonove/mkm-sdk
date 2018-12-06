@@ -40,3 +40,5 @@ site/
 *~
 .env
 MANIFEST
+# VS Code
+.vscode

@@ -6,6 +6,7 @@ from .exceptions import SerializationException
 
 class XMLSerializer:
     """Serializes data to XML"""
+
     def __init__(self):
         self.generator = None
 
@@ -26,14 +27,14 @@ class XMLSerializer:
             raise SerializationException("Can't serialize data, must be a dictionary.")
 
         stream = StringIO()
-        self.generator = XMLGenerator(stream, 'utf-8')
+        self.generator = XMLGenerator(stream, "utf-8")
 
         self.generator.startDocument()
-        self.generator.startElement('request', {})
+        self.generator.startElement("request", {})
 
         self._parse(data)
 
-        self.generator.endElement('request')
+        self.generator.endElement("request")
         self.generator.endDocument()
 
         return stream.getvalue()
@@ -59,5 +60,5 @@ class XMLSerializer:
 
         else:
             self.generator.startElement(previous_element_tag, {})
-            self.generator.characters('%s' % data)
+            self.generator.characters("%s" % data)
             self.generator.endElement(previous_element_tag)

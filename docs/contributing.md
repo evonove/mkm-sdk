@@ -69,6 +69,11 @@ Commit your changes and push your branch to GitHub:
 
 Submit a pull request through the GitHub website and wait for it to be accepted!
 
+## Code formatting
+
+Every contribution must be formatted with the `black` code formatter.
+This arguments must be used `--line-length 120 --py36 --skip-numeric-underscore-normalization`.
+
 ## Pull Request Guidelines
 
 Before you submit a pull request, check that it meets these guidelines:
@@ -77,4 +82,4 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 2.7 and 3.4.
+3. The pull request should work for every Python version currently supported.

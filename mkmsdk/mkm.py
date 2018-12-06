@@ -1,11 +1,10 @@
 from . import api_map
 from . import resolvers
 
-default_api_map = api_map._API_MAP['current']['api']
+default_api_map = api_map._API_MAP["current"]["api"]
 
 
 class Mkm:
-
     def __init__(self, api_map=None, **kwargs):
         """
         Initializes the api_map and eventual sandbox mode
@@ -16,7 +15,7 @@ class Mkm:
 
         """
         self.api_map = api_map
-        self.sandbox_mode = kwargs.get('sandbox_mode')
+        self.sandbox_mode = kwargs.get("sandbox_mode")
 
     def __getattr__(self, name):
         """
