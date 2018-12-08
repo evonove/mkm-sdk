@@ -38,7 +38,11 @@ class Api:
 
         auth = self.create_auth(complete_url)
 
-        response = request(method=method, url=complete_url, auth=auth, **kwargs)
+        # Some MKM endpoints might return a 3xx status code but they're not meant to be followed
+        # so disable auto follow of redirections.
+        # For more info see the official MKM documentation:
+        # https://www.mkmapi.eu/ws/documentation/API_1.1:Main_Page#307_Temporary_Redirect
+        response = request(method=method, url=complete_url, auth=auth, allow_redirects=False, **kwargs)
         return self.handle_response(response)
 
     def create_auth(self, url, app_token=None, app_secret=None, access_token=None, access_token_secret=None):
@@ -91,8 +95,8 @@ class Api:
             `response`: Returns the response received if positive or raise exception if negative
         """
 
-        status = response.status_code
-        if 200 <= status <= 299:
+        # We don't automatically follow redirects so accept those responses
+        if 200 <= response.status_code <= 399:
             return response
         else:
             raise exceptions.ConnectionError(response)

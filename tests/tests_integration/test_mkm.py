@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import pytest
+
 from . import missing_app_tokens
 from mkmsdk.mkm import mkm_sandbox
 
@@ -48,3 +50,44 @@ def test_card_search():
     response = mkm_sandbox.market_place.products(name="Jace, the Mind Sculptor", game=1, language=1, match=False)
 
     assert response.status_code == 200
+
+
+@pytest.fixture
+def create_stock_data(request):
+    """Creates some articles in the stock and deletes them on teardown"""
+    test_articles = {"article": []}
+    for i in range(1, 1001):
+        test_articles["article"].append(
+            {"idProduct": i, "idLanguage": 1, "comments": "test product", "count": 1, "price": 4, "condition": "EX"}
+        )
+    r = mkm_sandbox.stock_management.post_stock(data=test_articles)
+
+    def teardown():
+        articles_to_delete = {"article": []}
+        for a in r.json()["inserted"]:
+            articles_to_delete["article"].append(
+                {"idArticle": a["idArticle"]["idArticle"], "count": a["idArticle"]["count"]}
+            )
+        mkm_sandbox.stock_management.delete_stock(data=articles_to_delete)
+
+    return
+
+
+@missing_app_tokens
+def test_stock_requests(create_stock_data):
+    """Verifies stock requests are handled correctly and return expected status code"""
+
+    # Gets whole stock
+    r = mkm_sandbox.stock_management.get_stock()
+    assert r.status_code == 307
+
+    # Gets first stock page
+    r = mkm_sandbox.stock_management.get_stock_paginated(start=1)
+    assert r.status_code == 206
+
+    # Gets non existing stock page
+    # Note: MKM API's Documentations says that specifying a start parameter greater than the number of
+    # existing entities their backend returns a 204, No Content, but that seems to be wrong since
+    # a 206, Partial Content, is still returned.
+    r = mkm_sandbox.stock_management.get_stock_paginated(start=10000)
+    assert r.status_code == 206
