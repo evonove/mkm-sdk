@@ -10,7 +10,6 @@ pytest-mock
 
 # Code Style
 flake8
-black
 
 # Packaging
 wheel
