@@ -70,6 +70,8 @@ def create_stock_data(request):
             )
         mkm_sandbox.stock_management.delete_stock(data=articles_to_delete)
 
+    request.addfinalizer(teardown)
+
     return
 
 
