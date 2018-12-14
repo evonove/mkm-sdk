@@ -10,10 +10,10 @@ class SimpleResolver:
 
     """
 
-    def __init__(self, sandbox_mode):
+    def __init__(self, main_endpoint):
         self.url = ""
         self.method = ""
-        self.api = Api(sandbox_mode=sandbox_mode)
+        self.api = Api(main_endpoint)
 
     def setup(self, api_map=None, **kwargs):
         """

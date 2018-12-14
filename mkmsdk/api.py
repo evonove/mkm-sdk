@@ -5,21 +5,14 @@ from .MKMClient import MKMClient
 from . import exceptions
 from .utils import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
 from .MKMOAuth1 import MKMOAuth1
-from .api_map import _API_MAP
 
 
 class Api:
-    def __init__(self, sandbox_mode=False):
+    def __init__(self, base_endpoint):
         """
         Initializes the endpoint used for requests
-
-        Params:
-            `sandbox_mode`: Specifies if sending request to sandbox or live server
         """
-        if sandbox_mode:
-            self.base_endpoint = _API_MAP["current"]["api_sandbox_root"]
-        else:
-            self.base_endpoint = _API_MAP["current"]["api_root"]
+        self.base_endpoint = base_endpoint
 
     def request(self, url, method, **kwargs):
         """

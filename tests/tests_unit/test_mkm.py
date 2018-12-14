@@ -1,7 +1,15 @@
-from mkmsdk.mkm import mkm
+import pytest
+
+from mkmsdk.mkm import Mkm
+from mkmsdk.api_map import _API_MAP
 
 
-def test_simple_call(mocker):
+@pytest.fixture
+def mkm():
+    return Mkm(_API_MAP["current"]["api"], _API_MAP["current"]["api_sandbox_root"])
+
+
+def test_simple_call(mocker, mkm):
     """Verifies resolver is called when making a call."""
     mock_resolve = mocker.patch("mkmsdk.resolvers.SimpleResolver.resolve")
     mkm.account_management.account()

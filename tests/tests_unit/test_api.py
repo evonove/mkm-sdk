@@ -13,7 +13,7 @@ def test_create_auth():
     Verifies that the default Client is used
     when all the tokens are not empty strings.
     """
-    api = Api()
+    api = Api("https://api.cardmarket.com/ws/v1.1/output.json")
     auth = api.create_auth(
         "https://api.cardmarket.com/ws/v1.1/output.json",
         app_token="app_token",
@@ -35,7 +35,7 @@ def test_create_auth_with_empty_string_token():
     when access token and access token secret
     are empty strings.
     """
-    api = Api()
+    api = Api("https://api.cardmarket.com/ws/v1.1/output.json")
     auth = api.create_auth(
         "https://api.cardmarket.com/ws/v1.1/output.json",
         app_token="app_token",
@@ -61,7 +61,7 @@ def test_missing_env_var_raise_exception_correctly(mocker):
 
 def test_endpoint():
     """Verifies the live endpoint is used by default."""
-    api = Api()
+    api = Api("https://api.cardmarket.com/ws/v1.1/output.json")
     expected_live_base_endpoint = "https://api.cardmarket.com/ws/v1.1/output.json"
 
     assert api.base_endpoint == expected_live_base_endpoint
@@ -69,14 +69,14 @@ def test_endpoint():
 
 def test_sandbox_mode():
     """Verifies the sandbox endpoint is used when specified."""
-    sandbox_api = Api(sandbox_mode=True)
+    sandbox_api = Api("https://sandbox.cardmarket.com/ws/v1.1/output.json")
     expected_sandbox_base_endpoint = "https://sandbox.cardmarket.com/ws/v1.1/output.json"
 
     assert sandbox_api.base_endpoint == expected_sandbox_base_endpoint
 
 
 def test_handle_request(mocked_response):
-    api = Api()
+    api = Api("https://sandbox.cardmarket.com/ws/v1.1/output.json")
 
     mocked_response.status_code = 400
     with pytest.raises(exceptions.ConnectionError):

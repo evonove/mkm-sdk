@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 import pytest
 
+from mkmsdk.mkm import Mkm
+from mkmsdk.api_map import _API_MAP
+
 from . import missing_app_tokens
-from mkmsdk.mkm import mkm_sandbox
+
+
+@pytest.fixture
+def mkm_sandbox(scope="module"):
+    return Mkm(_API_MAP["current"]["api"], _API_MAP["current"]["api_sandbox_root"])
 
 
 @missing_app_tokens
-def test_response_is_as_expected():
+def test_response_is_as_expected(mkm_sandbox):
     """Verifies the list of games returned from backend is as expected."""
     response = mkm_sandbox.market_place.games()
     json_response = response.json()
@@ -36,7 +43,7 @@ def test_response_is_as_expected():
 
 
 @missing_app_tokens
-def test_sandbox_url():
+def test_sandbox_url(mkm_sandbox):
     """Verifies that mkm_sandbox sends its requests to sandbox backend."""
     response = mkm_sandbox.market_place.games()
 
@@ -45,7 +52,7 @@ def test_sandbox_url():
 
 
 @missing_app_tokens
-def test_card_search():
+def test_card_search(mkm_sandbox):
     """Verifies the search for a product with special chars in its names works correctly."""
     response = mkm_sandbox.market_place.products(name="Jace, the Mind Sculptor", game=1, language=1, match=False)
 
@@ -53,7 +60,7 @@ def test_card_search():
 
 
 @pytest.fixture
-def create_stock_data(request):
+def create_stock_data(request, mkm_sandbox):
     """Creates some articles in the stock and deletes them on teardown"""
     test_articles = {"article": []}
     for i in range(1, 1001):
@@ -76,7 +83,7 @@ def create_stock_data(request):
 
 
 @missing_app_tokens
-def test_stock_requests(create_stock_data):
+def test_stock_requests(create_stock_data, mkm_sandbox):
     """Verifies stock requests are handled correctly and return expected status code"""
 
     # Gets whole stock
