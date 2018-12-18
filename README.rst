@@ -23,10 +23,9 @@ Feel free to contribute! Submit `a PR following the guidelines <https://mkm-sdk.
 Requirements
 ============
 
-* Python 2.7, 3.3, 3.4, 3.5
+* Python 3.4, 3.5, 3.6, 3.7
 * `Requests <http://docs.python-requests.org/>`_
 * `Requests_OAuthlib <https://github.com/requests/requests-oauthlib/>`_
-* `six <https://pypi.python.org/pypi/six/>`_
 
 Setup
 =====
@@ -49,15 +48,32 @@ authorization to make requests. You can find them in your Magic Kard Market acco
 Usage
 =====
 
-First thing to do is import `mkm` to work on live servers or `mkm_sandbox` for the sandbox::
+First thing to do is import the `Mkm` class and the API map::
 
-    from mkmsdk.mkm import mkm, mkm_sandbox
+    from mkmsdk.mkm import Mkm
+    from mkmsdk.api_map import _API_MAP
 
-A request works like this::
+Instance a new instance of Mkm::
+
+    # Using API v1.1
+    mkm = Mkm(_API_MAP["1.1"]["api"], _API_MAP["1.1"]["api_root"])
+    # Using API v2.0
+    mkm = Mkm(_API_MAP["2.0"]["api"], _API_MAP["2.0"]["api_root"])
+
+If you want to test on Magic Card Market's sandbox you must use the sandbox root endpoint::
+
+    mkm_sandbox = Mkm(_API_MAP["2.0"]["api"], _API_MAP["2.0"]["api_sandbox_root"])
+
+To make a request::
 
     response = mkm.account_management.account()
 
+    # Formats an endpoint
     response = mkm.market_place.user(user='SampleUser')
+
+    # Call endpoint with specified parameters
+    response = mkm.account_management.vacation(params={"onVacation": "false"})
+
 
 This will return a `Response <http://docs.python-requests.org/en/latest/api/?highlight=response#requests.Response/>`_
 object that contains the response from the server.

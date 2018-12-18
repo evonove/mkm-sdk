@@ -110,7 +110,7 @@ def test_stock_requests(create_stock_data, mkm_sandbox):
 
 @missing_app_tokens
 def test_request_with_params(mkm_sandbox20):
-    """foo"""
+    """Verifies request to an endpoint that has mandatory parameters"""
 
     r = mkm_sandbox20.account_management.vacation(params={"onVacation": "false"})
     assert r.status_code == 200
