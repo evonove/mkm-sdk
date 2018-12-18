@@ -3,13 +3,19 @@ import pytest
 
 from mkmsdk.mkm import Mkm
 from mkmsdk.api_map import _API_MAP
+from mkmsdk import exceptions
 
 from . import missing_app_tokens
 
 
 @pytest.fixture
 def mkm_sandbox(scope="module"):
-    return Mkm(_API_MAP["current"]["api"], _API_MAP["current"]["api_sandbox_root"])
+    return Mkm(_API_MAP["1.1"]["api"], _API_MAP["1.1"]["api_sandbox_root"])
+
+
+@pytest.fixture
+def mkm_sandbox20(scope="module"):
+    return Mkm(_API_MAP["2.0"]["api"], _API_MAP["2.0"]["api_sandbox_root"])
 
 
 @missing_app_tokens
@@ -100,3 +106,15 @@ def test_stock_requests(create_stock_data, mkm_sandbox):
     # a 206, Partial Content, is still returned.
     r = mkm_sandbox.stock_management.get_stock_paginated(start=10000)
     assert r.status_code == 206
+
+
+@missing_app_tokens
+def test_request_with_params(mkm_sandbox20):
+    """foo"""
+
+    r = mkm_sandbox20.account_management.vacation(params={"onVacation": "false"})
+    assert r.status_code == 200
+
+    with pytest.raises(exceptions.ConnectionError) as e:
+        mkm_sandbox20.account_management.vacation()
+    assert e.value.response.status_code == 400

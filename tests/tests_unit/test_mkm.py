@@ -6,7 +6,7 @@ from mkmsdk.api_map import _API_MAP
 
 @pytest.fixture
 def mkm():
-    return Mkm(_API_MAP["current"]["api"], _API_MAP["current"]["api_sandbox_root"])
+    return Mkm(_API_MAP["1.1"]["api"], _API_MAP["1.1"]["api_sandbox_root"])
 
 
 def test_simple_call(mocker, mkm):

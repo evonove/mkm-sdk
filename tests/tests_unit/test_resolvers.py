@@ -8,7 +8,7 @@ from mkmsdk.api_map import _API_MAP
 def test_if_bad_api_map_is_handled_correctly():
     """Verifies setup throws an exception if api map used is empty."""
 
-    live_resolver = SimpleResolver(_API_MAP["current"]["api_root"])
+    live_resolver = SimpleResolver(_API_MAP["1.1"]["api_root"])
     empty_api_map = {}
 
     with pytest.raises(Exception):
@@ -21,7 +21,7 @@ def test_if_bad_api_map_is_handled_correctly():
 def test_if_setup_works_correctly():
     """Verifies setup correctly formats the url."""
 
-    live_resolver = SimpleResolver(_API_MAP["current"]["api_root"])
+    live_resolver = SimpleResolver(_API_MAP["1.1"]["api_root"])
     simple_api_map = {"url": "/account", "method": "get"}
     expected_url = "/account"
     expected_url_with_parameters = "/user/SimpleUser"
@@ -41,7 +41,7 @@ def test_if_setup_works_correctly():
 
 def test_if_bad_parameters_are_handled_correctly():
     """Verifies exception is thrown when user passes an unexisting parameter."""
-    live_resolver = SimpleResolver(_API_MAP["current"]["api_root"])
+    live_resolver = SimpleResolver(_API_MAP["1.1"]["api_root"])
     simple_api_map_with_parameters = {"url": "/user/{user}", "method": "get"}
 
     with pytest.raises(exceptions.MissingParam):
@@ -53,7 +53,7 @@ def test_if_bad_parameters_are_handled_correctly():
 
 def test_setup_escapes_additional_parameters():
     """Verifies setup escapes parameters containing spaces or special chars."""
-    live_resolver = SimpleResolver(_API_MAP["current"]["api_root"])
+    live_resolver = SimpleResolver(_API_MAP["1.1"]["api_root"])
     simple_api_map = {"url": "/products/{name}/{game}/{language}/{match}", "method": "get"}
     expected_url = "/products/Jace%2C%20the%20Mind%20Sculptor/1/1/False"
 

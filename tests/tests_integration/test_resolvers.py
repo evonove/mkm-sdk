@@ -7,7 +7,7 @@ from mkmsdk.resolvers import SimpleResolver
 @missing_app_tokens
 def test_resolve_with_xml_data():
     """Verifies posting xml data to backend returns a positive response."""
-    resolver = SimpleResolver(_API_MAP["current"]["api_sandbox_root"])
+    resolver = SimpleResolver(_API_MAP["1.1"]["api_sandbox_root"])
 
     simple_api_map = {"url": "/stock", "method": "post"}
 
@@ -40,7 +40,7 @@ def test_resolve_with_data():
     correctly if necessary before sending it to the backend
     so that it returns a positive response
     """
-    resolver = SimpleResolver(_API_MAP["current"]["api_sandbox_root"])
+    resolver = SimpleResolver(_API_MAP["1.1"]["api_sandbox_root"])
 
     simple_api_map = {"url": "/stock", "method": "post"}
 
