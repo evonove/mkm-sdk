@@ -1,3 +1,15 @@
+## 0.5.0 (2018-12-18)
+
+* Fixed handling of redirection requests
+* Updated API v1.1 endpoint
+* Added support for API v2.0
+* Removed support for Python 2.7 and 3.3
+* Added support for Python 3.6 and 3.7
+
+## 0.4.1 (2016-10-28)
+
+* Fixed issue with Widget applications
+
 ## 0.4.0 (2016-10-16)
 
 * Fixed bug when sending data to backend

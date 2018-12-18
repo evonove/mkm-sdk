@@ -29,6 +29,25 @@ if sys.argv[-1] == "publish":
     print(" git push --tags")
     sys.exit()
 
+keywords = " ".join(
+    [
+        "mkm",
+        "magickardmarket",
+        "magiccardmarket",
+        "sdk",
+        "mtg",
+        "magic the gathering",
+        "card",
+        "market",
+        "rest",
+        "tcg",
+        "trading card game",
+        "pokemon",
+        "wow",
+        "world of warcraft",
+        "yugioh",
+    ]
+)
 
 setup(
     name="mkmsdk",
@@ -43,15 +62,19 @@ setup(
     long_description=LONG_DESCRIPTION,
     install_requires=["requests", "requests_oauthlib"],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
+        "License :: OSI Approved :: MIT License",
         "Intended Audience :: Developers",
         "Natural Language :: English",
         "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3 :: Only",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords="mkm magickardmarket magiccardmarket sdk",
+    keywords=keywords,
 )
