@@ -18,7 +18,7 @@ class MKMClient(Client):
         oauthParamExist = False
         # Loop through the parameters to check if oauth_token is found
         for param in parameters:
-            if 'oauth_token' in param:
+            if "oauth_token" in param:
                 oauthParamExist = True
                 break
 
@@ -27,6 +27,6 @@ class MKMClient(Client):
         # the response will always be 401 Unauthorized
         # Documentation: https://www.mkmapi.eu/ws/documentation/API:Auth_OAuthHeader
         if not oauthParamExist:
-            parameters.append(('oauth_token', ''))
+            parameters.append(("oauth_token", ""))
 
         return parameters

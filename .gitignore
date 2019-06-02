@@ -21,6 +21,7 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .tox
+.cache
 nosetests.xml
 # Translations
 *.mo
@@ -33,9 +34,11 @@ nosetests.xml
 # Complexity
 output/*.html
 output/*/index.html
-# Sphinx
-docs/_build
+# Mkdocs
+site/
 # Backup files
 *~
 .env
 MANIFEST
+# VS Code
+.vscode

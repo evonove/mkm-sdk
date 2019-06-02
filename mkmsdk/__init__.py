@@ -1,25 +1,8 @@
-import os
-from . import exceptions
+"""Magic Kard Market SDK"""
 
+__title__ = "Magic Kard Market SDK"
+__version__ = "0.5.0"
+__author__ = "Evonove"
+__license__ = "MIT"
 
-def _get_env_var(key):
-    try:
-        return os.environ[key]
-    except KeyError:
-        raise exceptions.MissingConfig('Missing MKM env var: ' + key)
-
-
-def get_mkm_app_token():
-    return _get_env_var('MKM_APP_TOKEN')
-
-
-def get_mkm_app_secret():
-    return _get_env_var('MKM_APP_SECRET')
-
-
-def get_mkm_access_token():
-    return _get_env_var('MKM_ACCESS_TOKEN')
-
-
-def get_mkm_access_token_secret():
-    return _get_env_var('MKM_ACCESS_TOKEN_SECRET')
+VERSION = __version__

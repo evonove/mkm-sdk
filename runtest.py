@@ -1,10 +1,7 @@
-import unittest
 import sys
+import pytest
 
 
-if __name__ == "__main__":
-    loader = unittest.TestLoader()
-    tests = loader.discover(start_dir='.')
-    testRunner = unittest.runner.TextTestRunner()
-    result = testRunner.run(tests)
-    sys.exit(len(result.errors)+len(result.failures))
+# sys.exit() is required otherwise the wrapper exits
+# with exit code 0, regardless the pytest.main() execution
+sys.exit(pytest.main())

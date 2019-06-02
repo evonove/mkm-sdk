@@ -1,4 +1,0 @@
-requests
-requests_oauthlib
-sphinx
-six

@@ -3,24 +3,16 @@ from oauthlib.oauth1.rfc5849 import Client
 
 from .MKMClient import MKMClient
 from . import exceptions
-from . import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
+from .utils import get_mkm_app_token, get_mkm_app_secret, get_mkm_access_token, get_mkm_access_token_secret
 from .MKMOAuth1 import MKMOAuth1
-from .api_map import _API_MAP
 
 
 class Api:
-
-    def __init__(self, sandbox_mode=False):
+    def __init__(self, base_endpoint):
         """
         Initializes the endpoint used for requests
-
-        Params:
-            `sandbox_mode`: Specifies if sending request to sandbox or live server
         """
-        if sandbox_mode:
-            self.base_endpoint = _API_MAP['current']['api_sandbox_root']
-        else:
-            self.base_endpoint = _API_MAP['current']['api_root']
+        self.base_endpoint = base_endpoint
 
     def request(self, url, method, auth_params=None, **kwargs):
         """
@@ -35,23 +27,20 @@ class Api:
             `response`: Returns the response received from the server
         """
 
-        complete_url = '{}{}'.format(self.base_endpoint, url)
+        complete_url = "{}{}".format(self.base_endpoint, url)
 
         if auth_params is None:
             auth_params = {}
         auth = self.create_auth(complete_url, **auth_params)
 
-        try:
-            response = request(method=method, url=complete_url, auth=auth, **kwargs)
-            return self.handle_response(response, response.content)
-        except exceptions.BadRequest as error:
-            return {'error': error.content}
+        # Some MKM endpoints might return a 3xx status code but they're not meant to be followed
+        # so disable auto follow of redirections.
+        # For more info see the official MKM documentation:
+        # https://www.mkmapi.eu/ws/documentation/API_1.1:Main_Page#307_Temporary_Redirect
+        response = request(method=method, url=complete_url, auth=auth, allow_redirects=False, **kwargs)
+        return self.handle_response(response)
 
-    def create_auth(self, url,
-                    app_token=None,
-                    app_secret=None,
-                    access_token=None,
-                    access_token_secret=None):
+    def create_auth(self, url, app_token=None, app_secret=None, access_token=None, access_token_secret=None):
         """
         Create authorization with MKMOAuth1, if Access Token and Access Token Secret
         are not found a custom Client is used.
@@ -82,48 +71,27 @@ class Api:
         else:
             client = Client
 
-        return MKMOAuth1(app_token,
-                         client_secret=app_secret,
-                         resource_owner_key=access_token,
-                         resource_owner_secret=access_token_secret,
-                         client_class=client,
-                         realm=url)
+        return MKMOAuth1(
+            app_token,
+            client_secret=app_secret,
+            resource_owner_key=access_token,
+            resource_owner_secret=access_token_secret,
+            client_class=client,
+            realm=url,
+        )
 
-    def handle_response(self, response, content):
+    def handle_response(self, response):
         """
         Check the HTTP response
 
         Params:
             `response`: Response received from the server
-            `content`: Content of the response received
         Return:
             `response`: Returns the response received if positive or raise exception if negative
         """
 
-        status = response.status_code
-        if status in (301, 302, 303, 307):
-            raise exceptions.Redirection(response, content)
-        elif 200 <= status <= 299:
+        # We don't automatically follow redirects so accept those responses
+        if 200 <= response.status_code <= 399:
             return response
-        elif status == 400:
-            raise exceptions.BadRequest(response, content)
-        elif status == 401:
-            raise exceptions.UnauthorizedAccess(response, content)
-        elif status == 403:
-            raise exceptions.ForbiddenAccess(response, content)
-        elif status == 404:
-            raise exceptions.ResourceNotFound(response, content)
-        elif status == 405:
-            raise exceptions.MethodNotAllowed(response, content)
-        elif status == 409:
-            raise exceptions.ResourceConflict(response, content)
-        elif status == 410:
-            raise exceptions.ResourceGone(response, content)
-        elif status == 422:
-            raise exceptions.ResourceInvalid(response, content)
-        elif 401 <= status <= 499:
-            raise exceptions.ClientError(response, content)
-        elif 500 <= status <= 599:
-            raise exceptions.ServerError(response, content)
         else:
-            raise exceptions.ConnectionError(response, content, "Unknown response code: #{response.code}")
+            raise exceptions.ConnectionError(response)

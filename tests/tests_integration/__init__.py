@@ -1,38 +1,26 @@
-import unittest
+import pytest
 import os
 
-import mkmsdk
 
-
-def skip_integration():
+def dedicated_app_tokens_exist():
     try:
-        mkmsdk.get_mkm_app_token()
-        mkmsdk.get_mkm_app_secret()
-        mkmsdk.get_mkm_access_token()
-        mkmsdk.get_mkm_access_token_secret()
-        return False
-    except mkmsdk.exceptions.MissingConfig:
+        os.environ["MKM_APP_TOKEN"]
+        os.environ["MKM_APP_SECRET"]
+        os.environ["MKM_ACCESS_TOKEN"]
+        os.environ["MKM_ACCESS_TOKEN_SECRET"]
         return True
-
-
-def skip_account_integration():
-    try:
-        os.environ['MKM_ACCOUNT_LAST_NAME']
-        os.environ['MKM_ACCOUNT_FIRST_NAME']
-        return False
     except KeyError:
-        return True
-
-
-def skip_dedicated_app_integration():
-    try:
-        os.environ['MKM_ACCESS_TOKEN'] == ''
-        os.environ['MKM_ACCESS_TOKEN_SECRET'] == ''
         return False
-    except KeyError:
+
+
+def widget_app_tokens_exist():
+    try:
+        os.environ["MKM_APP_TOKEN"]
+        os.environ["MKM_APP_SECRET"]
         return True
+    except KeyError:
+        return False
 
 
-@unittest.skipIf(skip_integration(), 'Missing env vars, skipping integration test')
-class IntegrationTest(unittest.TestCase):
-    pass
+missing_app_tokens = pytest.mark.skipif(not dedicated_app_tokens_exist(), reason="Missing dedicated app tokens")
+missing_widget_tokens = pytest.mark.skipif(not widget_app_tokens_exist(), reason="Missing widget app tokens")

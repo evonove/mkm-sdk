@@ -1,105 +1,81 @@
 class ConnectionError(Exception):
-    def __init__(self, response, content=None, message=None):
+    """
+    Wraps errors related with
+    requests to backend
+    """
+
+    def __init__(self, response=None, message=None):
+        """
+        Initializes the exception with the response
+        received from the backend
+
+        Params:
+            `response`: The response received from backend
+            `message`: A custom message
+
+        Return:
+            `response`: Returns the response received from the server
+        """
         self.response = response
-        self.content = content
         self.message = message
 
     def __str__(self):
-        message = 'Request failed.'
-        if hasattr(self.response, 'status_code'):
-            message = '{}{}'.format(message, ' Status code: %s.' % self.response.status_code)
-        if hasattr(self.response, 'reason'):
-            message = '{}{}'.format(message, ' Response message: %s.' % self.response.reason)
-        if self.content:
-            message = '{}{}'.format(message, ' Error message: %s' % str(self.content))
+        """
+        Formats the error for the user so that it's
+        easier to understand
+        """
+        message = "Request failed"
+        if hasattr(self.response, "status_code"):
+            message = "{}{}".format(message, "\nStatus code: %s" % self.response.status_code)
+        if hasattr(self.response, "reason"):
+            message = "{}{}".format(message, "\nResponse message: %s" % self.response.reason)
+        if hasattr(self.response, "content"):
+            message = "{}{}".format(message, "\n%s" % self.response.content)
+        if self.message:
+            message = "{}{}".format(message, "\n%s" % self.message)
         return message
 
 
-class Redirection(ConnectionError):
+class MissingParam(Exception):
     """
-    3xx
+    Wraps errors caught when setting up
+    the url with its parameters
     """
+
+    def __init__(self, param):
+        """
+        Initializes the exception with the
+        missing parameter name
+
+        `param`: The missing parameter
+        """
+        self.param = param
+
     def __str__(self):
-        message = super(Redirection, self).__str__()
-        if self.response.get('Location'):
-            message = "{} => {}" .format(message, self.response.get('Location'))
-        return message
+        return "Missing %s parameter" % self.param
 
 
-class MissingParam(TypeError):
-    pass
-
-
-class MissingConfig(Exception):
-    pass
-
-
-class ClientError(ConnectionError):
+class MissingEnvVar(Exception):
     """
-    4xx Client Error
-    """
-    pass
-
-
-class BadRequest(ClientError):
-    """
-    400 Bad Request
-    """
-    pass
-
-
-class UnauthorizedAccess(ClientError):
-    """
-    401 Unauthorized
-    """
-    pass
-
-
-class ForbiddenAccess(ClientError):
-    """
-    403 Forbidden
+    Wraps errors for missing
+    environment variables
     """
 
+    def __init__(self, env):
+        """
+        Initializes the exception with the
+        missing variable name
 
-class ResourceNotFound(ClientError):
-    """
-    404 Not Found
-    """
-    pass
+        `env`: The missing environment variable
+        """
+        self.env = env
 
-
-class ResourceConflict(ClientError):
-    """
-    409 Conflict
-    """
-    pass
+    def __str__(self):
+        return "Missing %s environment variable" % self.env
 
 
-class ResourceGone(ClientError):
-    """
-    410 Gone
-    """
-    pass
+class SerializationException(Exception):
+    """Wraps exceptions raised during XML serialization"""
 
-
-class ResourceInvalid(ClientError):
-    """
-    422 Invalid
-    """
-    pass
-
-
-class ServerError(ConnectionError):
-    """
-    5xx Server Error
-    """
-    pass
-
-
-class MethodNotAllowed(ClientError):
-    """
-    405 Method Not Allowed
-    """
-
-    def allowed_methods(self):
-        return self.response['Allow']
+    def __str__(self):
+        return "Serialization exception. %s" % self.args

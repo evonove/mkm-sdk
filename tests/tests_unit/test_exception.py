@@ -1,38 +1,66 @@
-import unittest
 from collections import namedtuple
 
-from mkmsdk.exceptions import ConnectionError, Redirection, ResourceNotFound, UnauthorizedAccess, MissingParam
+from mkmsdk.exceptions import ConnectionError, MissingParam, MissingEnvVar, SerializationException
 
 
-class TestExceptions(unittest.TestCase):
+def test_connection_error_with_no_args():
+    """
+    Test error string is formatted correctly
+    when exception is initialized without arguments
+    """
+    error = ConnectionError()
 
-    def setUp(self):
-        self.Response = namedtuple('Response', 'status_code reason')
+    assert str(error) == "Request failed"
 
-    def test_connection(self):
-        error = ConnectionError({})
-        self.assertEqual(str(error), 'Request failed.')
 
-    def test_redirect(self):
-        error = Redirection({'Location': 'https://example.com'})
-        self.assertEqual(str(error), 'Request failed. => https://example.com')
+def test_connection_error_with_response():
+    """
+    Test error string is formatted correctly
+    when exception is initialized with response
+    """
+    Response = namedtuple("Response", "status_code reason content")
+    response = Response(status_code="404", reason="Not found", content="Here some content")
+    error = ConnectionError(response)
 
-    def test_not_found(self):
-        response = self.Response(status_code='404', reason='Not found')
-        error = ResourceNotFound(response)
-        self.assertEqual(str(error), 'Request failed. Status code: %s. Response message: %s.'
-                         % (response.status_code, response.reason))
+    assert str(error) == "Request failed\nStatus code: 404\nResponse message: Not found\nHere some content"
 
-    def test_unauthorized_access(self):
-        response = self.Response(status_code='401', reason='Unauthorized')
-        error = UnauthorizedAccess(response)
-        self.assertEqual(str(error), 'Request failed. Status code: %s. Response message: %s.'
-                         % (response.status_code, response.reason))
 
-    def test_missing_param(self):
-        error = MissingParam('Missing Payment Id')
-        self.assertEqual(str(error), 'Missing Payment Id')
+def test_connection_error_with_empty_response():
+    """
+    Test error string is formatted correctly
+    when exception is initialized with empty response
+    """
+    error = ConnectionError({})
 
-    def test_missing_config(self):
-        error = MissingParam('Missing client_id')
-        self.assertEqual(str(error), 'Missing client_id')
+    assert str(error) == "Request failed"
+
+
+def test_connection_error_with_message():
+    """
+    Test error string is formatted correctly
+    when exception is initialized with a message
+    """
+    error = ConnectionError(message="This is a message")
+
+    assert str(error) == "Request failed\nThis is a message"
+
+
+def test_missing_param():
+    """Test error string is formatted correctly"""
+    error = MissingParam("payment_id")
+
+    assert str(error) == "Missing payment_id parameter"
+
+
+def test_missing_config():
+    """Test error string is formatted correctly"""
+    error = MissingEnvVar("client_id")
+
+    assert str(error) == "Missing client_id environment variable"
+
+
+def test_serialization_exception():
+    """Test error string is formatted correctly"""
+    error = SerializationException("Something wrong with serialization")
+
+    assert str(error) == "Serialization exception. Something wrong with serialization"
