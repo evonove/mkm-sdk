@@ -14,7 +14,7 @@ class Api:
         """
         self.base_endpoint = base_endpoint
 
-    def request(self, url, method, **kwargs):
+    def request(self, url, method, auth_params=None, **kwargs):
         """
         Sends requests to the server with parameters passed
 
@@ -29,7 +29,10 @@ class Api:
 
         complete_url = "{}{}".format(self.base_endpoint, url)
 
-        auth = self.create_auth(complete_url)
+        if auth_params is None:
+            auth_params = {}
+
+        auth = self.create_auth(complete_url, **auth_params)
 
         # Some MKM endpoints might return a 3xx status code but they're not meant to be followed
         # so disable auto follow of redirections.
