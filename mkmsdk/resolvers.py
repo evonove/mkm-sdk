@@ -42,7 +42,7 @@ class SimpleResolver:
         self.url = quote(url)
         self.method = method
 
-    def resolve(self, api_map=None, data=None, params=None, **kwargs):
+    def resolve(self, api_map=None, data=None, params=None, auth=None, **kwargs):
         """
         Params:
             `api_map`: Dict with urls and methods for the request
@@ -58,4 +58,4 @@ class SimpleResolver:
             serializer = XMLSerializer()
             data = serializer.serialize(data=data)
 
-        return self.api.request(url=self.url, method=self.method, data=data, params=params)
+        return self.api.request(url=self.url, method=self.method, data=data, params=params, auth_params=auth)
