@@ -1,3 +1,4 @@
+# flake8: noqa
 _API_MAP = {
     "1.1": {
         "api_root": "https://api.cardmarket.com/ws/v1.1/output.json",
