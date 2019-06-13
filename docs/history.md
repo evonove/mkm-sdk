@@ -1,3 +1,7 @@
+## 0.5.1 (2019-06-13)
+
+* Added the option to pass auth parameters programatically
+
 ## 0.5.0 (2018-12-18)
 
 * Fixed handling of redirection requests
