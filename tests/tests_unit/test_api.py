@@ -121,3 +121,27 @@ def test_handle_request(mocked_response):
     mocked_response.status_code = 1001
     with pytest.raises(exceptions.ConnectionError):
         api.handle_response(mocked_response)
+
+
+def test_request_with_auth_params(mocker):
+    mocker.patch("mkmsdk.api.request")
+    api = Api("https://sandbox.cardmarket.com/ws/v1.1/output.json")
+    mocker.patch.object(api, 'create_auth')
+    mocker.patch.object(api, 'handle_response')
+
+    auth_params = {
+        "app_token": "my_app_token",
+        "app_secret": "my_app_secret",
+        "access_token": "my_access_token",
+        "access_token_secret": "my_access_token_secret"
+    }
+
+    api.request("/games", "get", auth_params=auth_params)
+
+    api.create_auth.assert_called_with(
+        "https://sandbox.cardmarket.com/ws/v1.1/output.json/games",
+        app_token="my_app_token",
+        app_secret="my_app_secret",
+        access_token="my_access_token",
+        access_token_secret="my_access_token_secret"
+    )
