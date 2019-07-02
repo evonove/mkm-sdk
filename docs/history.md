@@ -1,3 +1,7 @@
+## 0.5.2 (2019-07-02)
+
+* Added stock in cart call for API 1.1
+
 ## 0.5.1 (2019-06-13)
 
 * Added the option to pass auth parameters programatically
