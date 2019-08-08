@@ -342,7 +342,7 @@ _API_MAP = {
                     "description": "Returns a product specified by its ID",
                 },
                 "product_list": {
-                    "url": "/productslist",
+                    "url": "/productlist",
                     "method": "get",
                     "description": "Returns a gzipped CSV file with all relevant products available",
                 },
