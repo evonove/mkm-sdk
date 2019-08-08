@@ -1,3 +1,7 @@
+## 0.5.3 (2019-08-08)
+
+* Fixed typo in `product_list` url
+
 ## 0.5.2 (2019-07-02)
 
 * Added stock in cart call for API 1.1
