@@ -514,10 +514,10 @@ _API_MAP = {
                 },
             },
             "wants_list": {
-                "get_wants_list": {
+                "get_wants_lists": {
                     "url": "/wantslist",
                     "method": "get",
-                    "description": "Returns wants list of the authenticated user",
+                    "description": "Returns wants lists of the authenticated user",
                 },
                 "create_wants_list": {
                     "url": "/wantslist",
