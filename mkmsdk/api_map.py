@@ -514,7 +514,7 @@ _API_MAP = {
                 },
             },
             "wants_list": {
-                "get_wants_list": {
+                "get_all_wants_list": {
                     "url": "/wantslist",
                     "method": "get",
                     "description": "Returns wants list of the authenticated user",
@@ -524,7 +524,7 @@ _API_MAP = {
                     "method": "post",
                     "description": "Creates a new wants list for the authenticated user",
                 },
-                "get_wants_list_items": {
+                "get_wants_list": {
                     "url": "/wantslist/{wants}",
                     "method": "get",
                     "description": "Returns the single specified wants list with its details and items"
