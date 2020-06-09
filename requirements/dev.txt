@@ -40,6 +40,6 @@ six==1.11.0               # via bleach, livereload, more-itertools, pytest, read
 tornado==5.1.1            # via livereload, mkdocs
 tqdm==4.28.1              # via twine
 twine==1.12.1
-urllib3==1.24.1           # via requests
+urllib3==1.24.2           # via requests
 webencodings==0.5.1       # via bleach
 wheel==0.32.3
