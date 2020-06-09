@@ -39,7 +39,7 @@ requests==2.20.1          # via -r base.in, requests-oauthlib, requests-toolbelt
 six==1.11.0               # via bleach, livereload, more-itertools, pytest, readme-renderer
 tornado==5.1.1            # via livereload, mkdocs
 tqdm==4.28.1              # via twine
-twine==1.12.1             # via -r dev.in
-urllib3==1.24.1           # via requests
+twine==1.12.1
+urllib3==1.24.2           # via requests
 webencodings==0.5.1       # via bleach
 wheel==0.32.3             # via -r dev.in

@@ -514,7 +514,7 @@ _API_MAP = {
                 },
             },
             "wants_list": {
-                "get_wants_list": {
+                "get_all_wants_list": {
                     "url": "/wantslist",
                     "method": "get",
                     "description": "Returns wants list of the authenticated user",
