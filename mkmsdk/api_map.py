@@ -524,7 +524,7 @@ _API_MAP = {
                     "method": "post",
                     "description": "Creates a new wants list for the authenticated user",
                 },
-                "get_wants_list": {
+                "get_wants_list_items": {
                     "url": "/wantslist/{wants}",
                     "method": "get",
                     "description": "Returns the single specified wants list with its details and items"
