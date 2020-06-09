@@ -1,3 +1,7 @@
+## 0.5.4 (2020-06-09)
+
+* Fixed not being able to get all wants list
+
 ## 0.5.3 (2019-08-08)
 
 * Fixed typo in `product_list` url
