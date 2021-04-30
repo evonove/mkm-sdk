@@ -488,7 +488,7 @@ _API_MAP = {
                     "description": "Delete articles in the authenticated user's stock",
                 },
                 "get_stock_in_cart": {
-                    "url": "/shoppingcart-articles",
+                    "url": "/stock/shoppingcart-articles",
                     "method": "get",
                     "description": "Returns the articles of the authenticated user's stock that are currently in other user's shopping carts",
                 },
