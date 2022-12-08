@@ -10,7 +10,7 @@ attrs==18.2.0
     # via pytest
 bleach==3.3.0
     # via readme-renderer
-certifi==2018.11.29
+certifi==2022.12.7
     # via requests
 chardet==3.0.4
     # via requests
@@ -56,22 +56,18 @@ pygments==2.7.4
     # via readme-renderer
 pyparsing==2.4.7
     # via packaging
-pytest-cov==2.6.0
-    # via -r dev.in
-pytest-mock==1.10.0
-    # via -r dev.in
 pytest==4.0.1
     # via
     #   -r dev.in
     #   pytest-cov
     #   pytest-mock
+pytest-cov==2.6.0
+    # via -r dev.in
+pytest-mock==1.10.0
+    # via -r dev.in
 pyyaml==5.4
     # via mkdocs
 readme-renderer==24.0
-    # via twine
-requests-oauthlib==1.0.0
-    # via -r base.in
-requests-toolbelt==0.8.0
     # via twine
 requests==2.20.1
     # via
@@ -79,6 +75,10 @@ requests==2.20.1
     #   requests-oauthlib
     #   requests-toolbelt
     #   twine
+requests-oauthlib==1.0.0
+    # via -r base.in
+requests-toolbelt==0.8.0
+    # via twine
 six==1.11.0
     # via
     #   bleach
