@@ -56,22 +56,18 @@ pygments==2.7.4
     # via readme-renderer
 pyparsing==2.4.7
     # via packaging
-pytest-cov==2.6.0
-    # via -r dev.in
-pytest-mock==1.10.0
-    # via -r dev.in
 pytest==4.0.1
     # via
     #   -r dev.in
     #   pytest-cov
     #   pytest-mock
+pytest-cov==2.6.0
+    # via -r dev.in
+pytest-mock==1.10.0
+    # via -r dev.in
 pyyaml==5.4
     # via mkdocs
 readme-renderer==24.0
-    # via twine
-requests-oauthlib==1.0.0
-    # via -r base.in
-requests-toolbelt==0.8.0
     # via twine
 requests==2.20.1
     # via
@@ -79,6 +75,10 @@ requests==2.20.1
     #   requests-oauthlib
     #   requests-toolbelt
     #   twine
+requests-oauthlib==1.0.0
+    # via -r base.in
+requests-toolbelt==0.8.0
+    # via twine
 six==1.11.0
     # via
     #   bleach
@@ -98,5 +98,5 @@ urllib3==1.24.2
     # via requests
 webencodings==0.5.1
     # via bleach
-wheel==0.32.3
+wheel==0.38.1
     # via -r dev.in
