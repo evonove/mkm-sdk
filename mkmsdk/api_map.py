@@ -386,6 +386,16 @@ _API_MAP = {
                     "method": "get",
                     "description": "Returns all available articles for the specified user",
                 },
+                "create_export_user_offers": {
+                    "url": "/exports/userOffers/{user}",
+                    "method": "post",
+                    "description": "Request the export of Article entities for available articles from a specific user specified by its ID.",
+                },
+                "get_export_user_offers": {
+                    "url": "/exports/userOffers/{user}",
+                    "method": "get",
+                    "description": "Returns details for a requested export of Article entities for available articles from a specific user specified by its ID.",
+                },
             },
             "order_management": {
                 "get_order": {
