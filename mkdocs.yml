@@ -3,7 +3,7 @@ theme: readthedocs
 repo_url: https://github.com/evonove/mkm-sdk
 site_description: A simple SDK for dedicated apps for Magic Kard Market.
 site_author: Silvano Cerza
-pages:
+nav:
     - 'Home': 'index.md'
     - 'Installation': 'installation.md'
     - 'Usage': 'usage.md'

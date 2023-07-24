@@ -118,3 +118,41 @@ def test_request_with_params(mkm_sandbox20):
     with pytest.raises(exceptions.ConnectionError) as e:
         mkm_sandbox20.account_management.vacation()
     assert e.value.response.status_code == 400
+
+
+@missing_app_tokens
+def test_create_and_get_export_user_offers(mkm_sandbox20, mocker):
+    """Verifies request to create an export of user offers"""
+
+    response = mkm_sandbox20.market_place.create_export_user_offers(user="SimpleUser")
+    json_response = response.json()
+    assert response.status_code == 202
+
+    expected_response = {
+        "mkm_error_description": "The request has been accepted for processing, "
+                                 "but the processing has not been completed.",
+        "http_status_code": 202,
+        "http_status_code_description": "Accepted",
+        "rfc2616_description_link": "https://www.rfc-editor.org/rfc/rfc9110.html#name-status-codes"
+    }
+
+    assert json_response == expected_response
+
+    response = mkm_sandbox20.market_place.get_export_user_offers(user="SimpleUser")
+    json_response = response.json()
+    assert response.status_code == 200
+
+    expected_response = {
+        "userOffersRequests": {
+            "idRequest": mocker.ANY,
+            "idUser": mocker.ANY,
+            "status": "pending",
+            "startedAt": mocker.ANY,
+            "finishedAt": "0000-00-00 00:00:00",
+            "type": "User Inventory Export",
+            "resourceId": mocker.ANY,
+            "url": ""
+        }
+    }
+
+    assert json_response == expected_response
